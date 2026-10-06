@@ -2,7 +2,7 @@
 # NEXERA — nexeralive.com sunucu kurulumu (Zoniq'ten tamamen bağımsız).
 # Kullanım (root):  curl -fsSL https://raw.githubusercontent.com/gystndmr/nexeralive/main/kur.sh | bash
 #  * Site dosyaları: /opt/nexeralive/www  → kendi nginx konteyneri "nexeralive-web" (127.0.0.1:8090)
-#  * Sunucuda 80/443'ü dinleyen mevcut Caddy'ye nexeralive.com bloğu eklenir (HTTPS otomatik)
+#  * Sunucudaki Caddy'nin ek siteler klasörüne (caddy-ek/nexeralive.caddy) kendi dosyası yazılır; HALLET'in ana Caddyfile'ına dokunulmaz
 #  * Otomatik güncelleme: GitHub'daki index.html 3 dakikada bir kontrol edilir (nexeralive-guncelle.timer)
 set -euo pipefail
 [ "$(id -u)" = 0 ] || { echo "root olarak çalıştırın"; exit 1; }
@@ -34,25 +34,16 @@ docker rm -f "$NAME" >/dev/null 2>&1 || true
 docker run -d --name "$NAME" --restart unless-stopped -p "127.0.0.1:$P:80" -v "$WWW":/usr/share/nginx/html:ro nginx:alpine >/dev/null
 echo "    $NAME → 127.0.0.1:$P"
 
-echo "==> 4/5 Caddy'ye $D ekleniyor"
+echo "==> 4/5 Caddy'ye $D ekleniyor (HALLET'in ek siteler klasörü: caddy-ek, ana dosyaya dokunulmaz)"
 CADDY=$(docker ps --format '{{.Names}}' | grep -i caddy | head -1 || true)
 [ -n "$CADDY" ] || { echo "    HATA: çalışan Caddy konteyneri bulunamadı"; exit 2; }
-MNT=$(docker inspect -f '{{range .Mounts}}{{.Destination}}|{{.Source}}{{"\n"}}{{end}}' "$CADDY")
-LINE=$(echo "$MNT" | awk -F'|' '$1 ~ /Caddyfile$/ {print; exit}')
-if [ -n "$LINE" ]; then IN=${LINE%%|*}; SRC=${LINE#*|}
-else LINE=$(echo "$MNT" | awk -F'|' '$1=="/etc/caddy" {print; exit}'); IN=${LINE%%|*}/Caddyfile; SRC=${LINE#*|}/Caddyfile; fi
-[ -f "$SRC" ] || { echo "    HATA: Caddyfile bulunamadı ($CADDY)"; exit 3; }
-echo "    Caddy: $CADDY  dosya: $SRC"
-BK="$SRC.yedek.$(date +%F_%H%M%S)"; cp "$SRC" "$BK"
-# eski geçici blok ("# zoniq:nexeralive.com") ve önceki NEXERA bloğu çıkarılır, yenisi eklenir
-awk -v m1="# zoniq:$D" -v m2="$MARK" 'skip&&/^}/{skip=0;next} skip{next} $0==m1||$0==m2{skip=1;next} {print}' "$BK" > "$SRC.tmp"
-printf '\n%s\n%s, www.%s {\n    encode gzip\n    header {\n        Strict-Transport-Security "max-age=31536000"\n        X-Content-Type-Options nosniff\n    }\n    reverse_proxy 127.0.0.1:%s\n}\n' "$MARK" "$D" "$D" "$P" >> "$SRC.tmp"
-cat "$SRC.tmp" > "$SRC"; rm -f "$SRC.tmp"
-if docker exec "$CADDY" caddy validate --config "$IN" --adapter caddyfile >/dev/null 2>&1; then
-  docker exec "$CADDY" caddy reload --config "$IN" --adapter caddyfile >/dev/null 2>&1 || docker restart "$CADDY" >/dev/null
-  echo "    Caddy yeniden yüklendi (yedek: $BK)"
+EK=$(docker inspect -f '{{range .Mounts}}{{if eq .Destination "/etc/caddy/ek"}}{{.Source}}{{end}}{{end}}' "$CADDY")
+[ -n "$EK" ] && [ -d "$EK" ] || { echo "    HATA: Caddy'nin ek siteler klasörü (/etc/caddy/ek) bulunamadı; değişiklik yapılmadı"; exit 3; }
+printf '%s, www.%s {\n    encode gzip\n    reverse_proxy 127.0.0.1:%s\n}\n' "$D" "$D" "$P" > "$EK/nexeralive.caddy"
+if docker exec "$CADDY" caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
+  docker exec "$CADDY" caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 && echo "    Caddy ayarı yeniden okundu ($EK/nexeralive.caddy)"
 else
-  echo "    HATA: yapılandırma doğrulanamadı, yedek geri yüklendi"; cat "$BK" > "$SRC"; exit 4
+  rm -f "$EK/nexeralive.caddy"; echo "    HATA: ayar doğrulanamadı, nexeralive.caddy kaldırıldı (Caddy eski ayarla çalışmaya devam ediyor)"; exit 4
 fi
 
 echo "==> 5/5 Otomatik güncelleme kuruluyor (3 dakikada bir)"
