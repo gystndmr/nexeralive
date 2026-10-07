@@ -11,6 +11,9 @@ const BASE = process.env.ANTHROPIC_BASE_URL || 'https://api.anthropic.com';
 const ADMIN = process.env.ADMIN_KEY || '';
 const DATA = process.env.DATA_DIR || '/data';
 const LEADS = DATA + '/talepler.jsonl';
+const AR_DIR = DATA + '/ar';
+const AR_FILES = { 'erenkoy-maket.usdz':'model/vnd.usdz+zip', 'erenkoy-gercek.usdz':'model/vnd.usdz+zip', 'erenkoy-maket.glb':'model/gltf-binary', 'erenkoy-gercek.glb':'model/gltf-binary' };
+const AR_SRC = 'https://raw.githubusercontent.com/gystndmr/nexeralive/';
 fs.mkdirSync(DATA, { recursive: true });
 
 const SYSTEM = `Sen NEXERA Asistan'sın: NEXERA İnşaat Ltd. Şti.'nin (nexeralive.com) web sitesindeki Türkçe danışman.
@@ -83,10 +86,26 @@ function leadsPage(){
 ${rows.map(r => `<tr><td>${esc(new Date(r.zaman).toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }))}</td><td>${esc(r.ad)}</td><td><a href="tel:${esc(r.telefon)}">${esc(r.telefon)}</a></td><td>${esc(r.eposta)}</td><td>${esc(r.adres)}</td><td>${esc(r.konu)}</td><td>${esc(r.not)}</td><td>${esc(r.kaynak)}</td></tr>`).join('')}</table></div>`;
 }
 
+// AR models are kept in the repo; served here with the MIME types iOS Quick Look / Android Scene Viewer require
+async function serveAR(res, name, ver){
+  const type = AR_FILES[name]; if (!type) return send(res, 404, { error: 'yok' });
+  const v = /^[0-9a-f]{7,40}$/.test(ver || '') ? ver : 'main';
+  const file = `${AR_DIR}/${v}-${name}`;
+  if (!fs.existsSync(file)){
+    fs.mkdirSync(AR_DIR, { recursive: true });
+    const r = await fetch(AR_SRC + v + '/ar/' + name); if (!r.ok) return send(res, 502, { error: 'model alınamadı' });
+    fs.writeFileSync(file + '.tmp', Buffer.from(await r.arrayBuffer())); fs.renameSync(file + '.tmp', file);
+  }
+  const st = fs.statSync(file);
+  res.writeHead(200, { 'Content-Type': type, 'Content-Length': st.size, 'Cache-Control': v === 'main' ? 'public, max-age=300' : 'public, max-age=31536000, immutable', 'Access-Control-Allow-Origin': '*' });
+  fs.createReadStream(file).pipe(res);
+}
+
 http.createServer(async (req, res) => {
   const url = new URL(req.url, 'http://x'); const ip = ipOf(req);
   try {
     if (req.method === 'GET' && url.pathname === '/api/durum') return send(res, 200, { ai: !!KEY });
+    if ((req.method === 'GET' || req.method === 'HEAD') && url.pathname.startsWith('/api/ar/')) return serveAR(res, url.pathname.slice(8), url.searchParams.get('v'));
     if (req.method === 'POST' && url.pathname === '/api/asistan'){
       if (!KEY) return send(res, 503, { error: 'ai kapalı' });
       if (limited('a' + ip, 40, 10 * 60e3)) return send(res, 429, { error: 'çok fazla istek' });
