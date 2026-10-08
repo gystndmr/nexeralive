@@ -5,7 +5,8 @@
 #  * Sunucudaki Caddy'nin ek siteler klasörüne (caddy-ek/nexeralive.caddy) kendi dosyası yazılır; HALLET'in ana Caddyfile'ına dokunulmaz
 #  * API (asistan + talepler): kendi konteyneri "nexeralive-api" (127.0.0.1:8091); /api/* oraya yönlenir
 #    Yapay zekâ için: curl ... | ANTHROPIC_API_KEY=sk-ant-... bash   (anahtar /opt/nexeralive/api.env içinde saklanır)
-#  * Otomatik güncelleme: GitHub'daki index.html ve api/server.js 3 dakikada bir kontrol edilir (nexeralive-guncelle.timer)
+#  * Otomatik güncelleme: GitHub'daki site (index.html + www/), api/server.js ve güncelleyicinin kendisi 3 dakikada bir kontrol edilir (nexeralive-guncelle.timer)
+#  * Yeni talep bildirimi: talepler sayfasında telefona bildirim (ntfy) bağlantısı yer alır
 set -euo pipefail
 [ "$(id -u)" = 0 ] || { echo "root olarak çalıştırın"; exit 1; }
 D=nexeralive.com
@@ -20,11 +21,27 @@ docker rm -f site-nexeralive-com >/dev/null 2>&1 || true
 rm -rf /srv/siteler/nexeralive.com /srv/siteler/.nexeralive.com.port
 rmdir /srv/siteler 2>/dev/null || true
 
-echo "==> 2/5 Site dosyası indiriliyor"
+echo "==> 2/5 Site dosyaları indiriliyor"
 mkdir -p "$WWW"
 curl -fsSL "$RAW/index.html?t=$(date +%s)" -o "$WWW/index.html.yeni"
 grep -q "NEXERA" "$WWW/index.html.yeni" && mv "$WWW/index.html.yeni" "$WWW/index.html"
 chmod 644 "$WWW/index.html"
+# nginx ayarı: göreli yönlendirme, sıkıştırma, rehber sayfaları için klasör dizini
+cat > "$BASE/nginx.conf" <<'NGX'
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+    absolute_redirect off;
+    gzip on; gzip_types text/css application/javascript application/json image/svg+xml text/xml application/xml text/plain;
+    location = /index.html { add_header Cache-Control "no-cache"; }
+    location = / { add_header Cache-Control "no-cache"; try_files /index.html =404; }
+    location ~* \.(jpg|jpeg|png|webp|svg|woff2?)$ { add_header Cache-Control "public, max-age=604800"; }
+    location / { try_files $uri $uri/ =404; }
+    error_page 404 /index.html;
+}
+NGX
 
 echo "==> 3/5 Web sunucusu (nginx) başlatılıyor"
 PORTF=$BASE/port
@@ -33,7 +50,7 @@ if [ ! -s "$PORTF" ]; then
 fi
 P=$(cat "$PORTF")
 docker rm -f "$NAME" >/dev/null 2>&1 || true
-docker run -d --name "$NAME" --restart unless-stopped -p "127.0.0.1:$P:80" -v "$WWW":/usr/share/nginx/html:ro nginx:alpine >/dev/null
+docker run -d --name "$NAME" --restart unless-stopped -p "127.0.0.1:$P:80" -v "$WWW":/usr/share/nginx/html:ro -v "$BASE/nginx.conf":/etc/nginx/conf.d/default.conf:ro nginx:alpine >/dev/null
 echo "    $NAME → 127.0.0.1:$P"
 
 echo "==> 3b/5 API (asistan + talepler) başlatılıyor"
@@ -64,22 +81,7 @@ else
 fi
 
 echo "==> 5/5 Otomatik güncelleme kuruluyor (3 dakikada bir)"
-cat > /usr/local/bin/nexeralive-guncelle <<'UPD'
-#!/usr/bin/env bash
-set -euo pipefail
-WWW=/opt/nexeralive/www
-T=$(mktemp)
-curl -fsSL "https://raw.githubusercontent.com/gystndmr/nexeralive/main/index.html?t=$(date +%s)" -o "$T" || { rm -f "$T"; exit 0; }
-if [ -s "$T" ] && grep -q "NEXERA" "$T" && ! cmp -s "$T" "$WWW/index.html"; then
-  install -m 644 "$T" "$WWW/index.html"; echo "$(date -Is) site güncellendi"
-fi
-rm -f "$T"
-S=$(mktemp)
-if curl -fsSL "https://raw.githubusercontent.com/gystndmr/nexeralive/main/api/server.js?t=$(date +%s)" -o "$S" && [ -s "$S" ] && grep -q "createServer" "$S" && ! cmp -s "$S" /opt/nexeralive/api/server.js; then
-  install -m 644 "$S" /opt/nexeralive/api/server.js; docker restart nexeralive-api >/dev/null 2>&1 || true; echo "$(date -Is) api güncellendi"
-fi
-rm -f "$S"
-UPD
+curl -fsSL "$RAW/guncelle.sh?t=$(date +%s)" -o /usr/local/bin/nexeralive-guncelle.yeni && bash -n /usr/local/bin/nexeralive-guncelle.yeni && mv /usr/local/bin/nexeralive-guncelle.yeni /usr/local/bin/nexeralive-guncelle
 chmod 755 /usr/local/bin/nexeralive-guncelle
 cat > /etc/systemd/system/nexeralive-guncelle.service <<'UNIT'
 [Unit]
@@ -98,9 +100,12 @@ OnUnitActiveSec=3min
 WantedBy=timers.target
 UNIT
 systemctl daemon-reload && systemctl enable --now nexeralive-guncelle.timer >/dev/null
+/usr/local/bin/nexeralive-guncelle || true   # rehber sayfaları, sitemap ve paylaşım görselini hemen indir
 
 sleep 6
 echo "==> Kontrol"
 curl -s -o /dev/null -w "    https://$D → HTTP %{http_code}\n" --max-time 20 "https://$D/" || echo "    HTTPS sertifikası birkaç saniye içinde alınacak."
 echo "==> Tamam. Site: https://$D"
-echo "    Talepler: https://$D/api/talepler?key=$(grep '^ADMIN_KEY=' "$ENVF" | cut -d= -f2)"
+AK=$(grep '^ADMIN_KEY=' "$ENVF" | cut -d= -f2)
+echo "    Talepler: https://$D/api/talepler?key=$AK"
+echo "    Telefona bildirim (ntfy uygulamasında abone olun): nexera-$(printf '%s' "nexera-ntfy:$AK" | sha256sum | cut -c1-20)"
