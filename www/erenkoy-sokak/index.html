@@ -16,7 +16,7 @@
 :root{--gold:#d9b878;--gold2:#f6dca6;--text:#e8edf6;--muted:#8c9bb8;--line:rgba(217,184,120,.3);--mono:'JetBrains Mono',ui-monospace,monospace;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#0b1424;color:var(--text);font-family:Manrope,system-ui,sans-serif;overflow:hidden}
-#pano{position:fixed;inset:0}
+#svw{position:fixed;inset:0}#pano{width:100%;height:100%}
 #cv{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 header{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;justify-content:space-between;align-items:flex-start;padding:max(14px,env(safe-area-inset-top)) 14px 0;pointer-events:none}
 header a{pointer-events:auto;text-decoration:none;font:400 10px var(--mono);letter-spacing:.16em;color:var(--gold2);border:1px solid var(--line);padding:9px 11px;background:rgba(4,9,20,.72);backdrop-filter:blur(8px)}
@@ -33,7 +33,7 @@ header a{pointer-events:auto;text-decoration:none;font:400 10px var(--mono);lett
 </style>
 </head>
 <body>
-<div id="pano"></div>
+<div id="svw"><div id="pano"></div></div>
 <canvas id="cv"></canvas>
 <header><a href="/#konum">← SİTE</a><a href="/erenkoy-3d/">HAVADAN 3B ↗</a></header>
 <div class="box"><small>ERENKÖY · 3450 ADA 186 PARSEL</small><h1>Gerçek sokakta, <b>yeni bina.</b></h1>
