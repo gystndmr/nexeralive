@@ -12,6 +12,7 @@ const ADMIN = process.env.ADMIN_KEY || '';
 const DATA = process.env.DATA_DIR || '/data';
 const LEADS = DATA + '/talepler.jsonl';
 const AR_DIR = DATA + '/ar';
+const DIAG = DATA + '/hatalar.jsonl';
 const AR_FILES = { 'erenkoy-maket.usdz':'model/vnd.usdz+zip', 'erenkoy-gercek.usdz':'model/vnd.usdz+zip', 'erenkoy-maket.glb':'model/gltf-binary', 'erenkoy-gercek.glb':'model/gltf-binary' };
 const AR_SRC = 'https://raw.githubusercontent.com/gystndmr/nexeralive/';
 // phone push notifications for new leads via ntfy (topic is secret, derived from ADMIN_KEY unless NTFY_TOPIC is set)
@@ -126,6 +127,20 @@ http.createServer(async (req, res) => {
       if (!KEY) return send(res, 503, { error: 'ai kapalı' });
       if (limited('a' + ip, 40, 10 * 60e3)) return send(res, 429, { error: 'çok fazla istek' });
       return send(res, 200, await asistan(await readBody(req), ip));
+    }
+    if (req.method === 'POST' && url.pathname === '/api/hata'){
+      if (limited('h' + ip, 80, 10 * 60e3)) return send(res, 204, '', 'text/plain');
+      const b = await readBody(req).catch(() => ({}));
+      const rec = { z: new Date().toISOString(), ip: ip.replace(/\.\d+$/, '.x'), k: clean(b.k, 30), m: clean(b.m, 300), ua: clean(b.ua, 160), w: +b.w || 0, h: +b.h || 0, dpr: +b.dpr || 0, mem: +b.mem || 0 };
+      fs.appendFileSync(DIAG, JSON.stringify(rec) + '\n');
+      try { if (fs.statSync(DIAG).size > 2e6) fs.writeFileSync(DIAG, fs.readFileSync(DIAG, 'utf8').split('\n').slice(-3000).join('\n')); } catch {}
+      return send(res, 204, '', 'text/plain');
+    }
+    if (req.method === 'GET' && url.pathname === '/api/hatalar'){
+      const ck = /(?:^|;\s*)nxk=([0-9a-f]+)/.exec(req.headers.cookie || ''); const k = url.searchParams.get('key') || (ck && ck[1]);
+      if (!ADMIN || k !== ADMIN) return send(res, 403, 'yetkisiz', 'text/plain');
+      const rows = fs.existsSync(DIAG) ? fs.readFileSync(DIAG, 'utf8').trim().split('\n').filter(Boolean).slice(-300) : [];
+      return send(res, 200, rows.map(r => { try { return JSON.parse(r); } catch { return r; } }));
     }
     if (req.method === 'POST' && url.pathname === '/api/talep'){
       if (limited('t' + ip, 6, 60 * 60e3)) return send(res, 429, { error: 'çok fazla istek' });
