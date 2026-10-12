@@ -15,7 +15,7 @@ const PAGES = [
   lead: 'İlk görüşmeden yeni dairenizin anahtarına kadar kentsel dönüşüm; hukuki, teknik ve insani adımlardan oluşan uzun bir yolculuktur. Bu rehberde her adımı, sizin ne yaptığınızı ve NEXERA\'nın neyi üstlendiğini sade bir dille anlatıyoruz.',
   body: `
 <h2>1. Ön görüşme ve ön değerlendirme</h2>
-<p>Her şey binanızı tanımakla başlar. Adres ya da ada/parsel bilgisiyle imar durumu, emsal (KAKS), plan notları, yapı yaklaşma mesafeleri ve otopark koşulları incelenir. Bu çalışma, yeni binanın yaklaşık büyüklüğünü ve dönüşümün sizin için ne anlama geldiğini ilk günden gösterir. Ön fikir edinmek için <a href="/#hesapla">Binam ne kazanır? hesaplayıcısını</a> kullanabilirsiniz.</p>
+<p>Her şey binanızı tanımakla başlar. Adres ya da ada/parsel bilgisiyle imar durumu, emsal (KAKS), plan notları, yapı yaklaşma mesafeleri ve otopark koşulları incelenir. Bu çalışma, yeni binanın yaklaşık büyüklüğünü ve dönüşümün sizin için ne anlama geldiğini ilk günden gösterir. Ön fikir edinmek için <a href="/kentsel-donusum/#hesapla">Binam ne kazanır? hesaplayıcısını</a> kullanabilirsiniz.</p>
 <h2>2. Riskli yapı tespiti</h2>
 <p>6306 sayılı Afet Riski Altındaki Alanların Dönüştürülmesi Hakkında Kanun kapsamındaki süreç, binanın riskli yapı olarak tespit edilmesiyle başlar. Tespit, Çevre, Şehircilik ve İklim Değişikliği Bakanlığı tarafından lisanslandırılmış kuruluşlarca yapılır. Başvuru için tüm maliklerin bir araya gelmesi gerekmez; maliklerden birinin başvurusu yeterlidir. Ayrıntılar için <a href="/riskli-yapi-tespiti/">riskli yapı tespiti rehberimize</a> bakabilirsiniz.</p>
 <h2>3. Şerh ve tebliğ</h2>
@@ -59,7 +59,7 @@ const PAGES = [
 <h2>Rapordan sonra ne olur?</h2>
 <p>Rapor ilgili idarece incelenip onaylanır, tapuya riskli yapı şerhi işlenir ve maliklere tebliğ edilir. Maliklerin, tebliğden itibaren yasal süre içinde rapora itiraz etme hakkı vardır. Ardından malik toplantısı, karar ve sözleşme aşamalarına geçilir. Tüm adımları <a href="/kentsel-donusum-sureci/">kentsel dönüşüm süreci</a> sayfasında bulabilirsiniz.</p>
 <h2>Binam riskli olabilir mi?</h2>
-<p>Kesin cevabı yalnızca lisanslı kuruluşların yapacağı tespit verir. Yine de yapım yılı, kat sayısı, taşıyıcı elemanlardaki hasar ve sonradan yapılan tadilatlar gibi işaretler bir ön fikir verir. <a href="/#test">2 dakikalık riskli yapı ön testimizle</a> binanızın önceliğini görebilirsiniz.</p>
+<p>Kesin cevabı yalnızca lisanslı kuruluşların yapacağı tespit verir. Yine de yapım yılı, kat sayısı, taşıyıcı elemanlardaki hasar ve sonradan yapılan tadilatlar gibi işaretler bir ön fikir verir. <a href="/kentsel-donusum/#test">2 dakikalık riskli yapı ön testimizle</a> binanızın önceliğini görebilirsiniz.</p>
 <p class="small">Bu sayfa genel bilgilendirme amaçlıdır, hukuki danışmanlık yerine geçmez. Süre ve şartlar mevzuat değişikliklerine bağlı olarak değişebilir.</p>` },
 
 { slug: 'kadikoy-kentsel-donusum', kicker: 'REHBER · KADIKÖY', title: 'Kadıköy\'de Kentsel Dönüşüm',
@@ -77,7 +77,7 @@ const PAGES = [
 <h2>NEXERA\'nın yaklaşımı</h2>
 <p>NEXERA, İstanbul Anadolu yakasında, özellikle Kadıköy\'de kentsel dönüşüm ve konut projeleri geliştirir. Yaklaşımımız üç ilkeye dayanır: güvenlikten taviz vermemek, malikleri her adımda şeffaf biçimde bilgilendirmek ve kopyala-yapıştır olmayan, parsele özgü zamansız bir mimari üretmek. İlk projemiz Erenköy\'de hazırlık aşamasındadır.</p>
 <h2>Binanız için ilk adım</h2>
-<p>Binanızın dönüşümde ne kazanabileceğini görmek için <a href="/#hesapla">hesaplayıcıyı</a> kullanabilir, risk durumu için <a href="/#test">ön testi</a> yapabilir ya da doğrudan bizimle iletişime geçebilirsiniz. Ön değerlendirmede imar durumunu, emsali ve parsel koşullarını sizin için inceleriz.</p>` },
+<p>Binanızın dönüşümde ne kazanabileceğini görmek için <a href="/kentsel-donusum/#hesapla">hesaplayıcıyı</a> kullanabilir, risk durumu için <a href="/kentsel-donusum/#test">ön testi</a> yapabilir ya da doğrudan bizimle iletişime geçebilirsiniz. Ön değerlendirmede imar durumunu, emsali ve parsel koşullarını sizin için inceleriz.</p>` },
 
 { slug: 'erenkoy-kentsel-donusum', kicker: 'REHBER · ERENKÖY', title: 'Erenköy\'de Kentsel Dönüşüm',
   h1: 'Erenköy\'de <span>kentsel dönüşüm.</span>',
@@ -94,9 +94,9 @@ const PAGES = [
 <li>Komşu parsellerle birleşme olanaklarının değerlendirilmesi</li>
 </ul>
 <h2>NEXERA\'nın ilk projesi Erenköy\'de</h2>
-<p>NEXERA\'nın ilk projesi Erenköy\'de hazırlık aşamasında. Projeyi <a href="/#insa">sitemizde 3B olarak</a> inceleyebilir, telefonunuzdan <a href="/#ar">artırılmış gerçeklikle masanıza yerleştirebilirsiniz</a>.</p>
+<p>NEXERA\'nın ilk projesi Erenköy\'de hazırlık aşamasında. Projeyi <a href="/projeler/#insa">sitemizde 3B olarak</a> inceleyebilir, telefonunuzdan <a href="/projeler/#ar">artırılmış gerçeklikle masanıza yerleştirebilirsiniz</a>.</p>
 <h2>Binanız Erenköy\'de mi?</h2>
-<p>Binanız için ücretsiz ön değerlendirme isteyebilir, <a href="/#test">riskli yapı ön testini</a> yapabilir ya da <a href="/#hesapla">dönüşümde ne kazanacağınızı hesaplayabilirsiniz</a>.</p>` },
+<p>Binanız için ücretsiz ön değerlendirme isteyebilir, <a href="/kentsel-donusum/#test">riskli yapı ön testini</a> yapabilir ya da <a href="/kentsel-donusum/#hesapla">dönüşümde ne kazanacağınızı hesaplayabilirsiniz</a>.</p>` },
 
 { slug: 'sss', kicker: 'REHBER · SSS', title: 'Kentsel Dönüşüm Sık Sorulan Sorular',
   h1: 'Sık sorulan <span>sorular.</span>',
@@ -146,11 +146,11 @@ function page(p){
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -6 215 160'%3E%3Cpath fill='%233d8bff' d='M0 5L42 5L128 72L100 90L40 47L40 135L0 150Z'/%3E%3Cpath fill='%233d8bff' d='M96 0L203 73L96 147L96 110L148 73L96 38Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cormorant+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
 <style>${css}</style><script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': ld })}</script></head>
-<body><header><a class="logo" href="/">${LOGO}NEXERA</a><nav><a href="/#test">RİSK TESTİ</a><a href="/#hesapla">HESAPLA</a><a href="/#iletisim">İLETİŞİM</a></nav></header>
+<body><header><a class="logo" href="/">${LOGO}NEXERA</a><nav><a href="/kentsel-donusum/#test">RİSK TESTİ</a><a href="/kentsel-donusum/#hesapla">HESAPLA</a><a href="/kurumsal/#iletisim">İLETİŞİM</a></nav></header>
 <main><div class="k">${p.kicker}</div><h1>${p.h1}</h1><p class="lead">${p.lead}</p>
 ${body}
 <div class="cta"><b>ÜCRETSİZ ÖN DEĞERLENDİRME</b><p>Binanız için imar durumunu, emsali ve dönüşüm olanaklarını birlikte inceleyelim.</p>
-<div class="btns"><a href="/#test">RİSK TESTİ →</a><a href="/#hesapla">BİNAM NE KAZANIR? →</a><a class="wa" href="https://wa.me/905512720606?text=${encodeURIComponent('Merhaba, binam için ön değerlendirme istiyorum.')}">WHATSAPP</a><a href="tel:+905512720606">0551 272 06 06</a></div></div>
+<div class="btns"><a href="/kentsel-donusum/#test">RİSK TESTİ →</a><a href="/kentsel-donusum/#hesapla">BİNAM NE KAZANIR? →</a><a class="wa" href="https://wa.me/905512720606?text=${encodeURIComponent('Merhaba, binam için ön değerlendirme istiyorum.')}">WHATSAPP</a><a href="tel:+905512720606">0551 272 06 06</a></div></div>
 <nav class="more"><b>DİĞER REHBERLER</b>${others}</nav></main>
 <footer><span>© ${new Date().getFullYear()} NEXERA İNŞAAT LTD. ŞTİ.</span><span>Yakacık Çarşı Mah. Rota Sk. B Blok No:1 B, Kartal / İstanbul</span><span><a href="mailto:info@nexeralive.com">info@nexeralive.com</a> · <a href="tel:+905512720606">+90 551 272 06 06</a></span></footer>
 </body></html>`;
