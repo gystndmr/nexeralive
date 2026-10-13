@@ -786,6 +786,66 @@ body.hk-on .hud-rail,body.hk-on .hud-br{opacity:0;pointer-events:none}.hud-rail,
 footer .pages{display:flex;flex-wrap:wrap;gap:10px 26px;font:400 10.5px var(--mono);letter-spacing:.22em;margin:0 0 26px;position:relative;z-index:1}
 footer .pages a{color:var(--gold2)}
 
+/* ===== hikâye: render kareleri + iç mekân geçişi ===== */
+#hkRoom{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.25);transform-origin:50% 45%;pointer-events:none;will-change:opacity,transform}
+@media (max-width:900px) and (orientation:portrait){ #hkRoom{object-position:42% 50%} }
+
+/* ===== ALIVE akıllı daire ===== */
+.daire{min-height:auto;padding-top:120px;padding-bottom:120px}
+.daire h2{margin-bottom:18px}
+.daire .lead{margin-bottom:34px}
+#daireApp{position:relative}
+.dr-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.dr-rooms,.dr-scenes{display:flex;gap:6px;flex-wrap:wrap}
+.dr-rooms button,.dr-scenes button{font:400 10px var(--mono);letter-spacing:.22em;padding:10px 14px;border:1px solid var(--line2);color:var(--muted);background:rgba(6,14,32,.5);transition:.3s}
+.dr-rooms button.on,.dr-scenes button.on{color:var(--ink);background:var(--gold2);border-color:var(--gold2)}
+.dr-hud{display:flex;gap:18px;flex-wrap:wrap;font:400 9.5px var(--mono);letter-spacing:.2em;color:var(--muted)}
+.dr-hud b{color:var(--gold2);font-weight:400}.dr-hud .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5fe0a0;box-shadow:0 0 8px #5fe0a0;margin-right:8px}
+.dr-stage{position:relative;aspect-ratio:4/3;width:min(100%,calc(82vh*4/3));margin:0 auto;overflow:hidden;border:1px solid var(--line);background:#0b0a09;--dim:0;--warm:0;--day:0;--cur:0%}
+.dr-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .26s,filter 1.2s}
+.dr-stage.swap .dr-img{opacity:0}
+.dr-stage.nat .dr-img{filter:saturate(.88) hue-rotate(-6deg) brightness(1.04)}
+.dr-dim{position:absolute;inset:0;background:#03050a;opacity:var(--dim);transition:opacity 1.2s;pointer-events:none}
+.dr-warm{position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 30%,#ff9a4a,transparent 70%);mix-blend-mode:soft-light;opacity:var(--warm);transition:opacity 1.2s;pointer-events:none}
+.dr-day{position:absolute;inset:0;background:linear-gradient(180deg,#cfe3ff,#fff6e8);mix-blend-mode:soft-light;opacity:var(--day);transition:opacity 1.4s;pointer-events:none}
+.dr-win{position:absolute;pointer-events:none;overflow:hidden}
+.dr-win i{position:absolute;top:0;bottom:0;width:var(--cur);transition:width 1.6s cubic-bezier(.6,0,.2,1);
+  background:repeating-linear-gradient(90deg,rgba(214,199,176,.97) 0 14px,rgba(186,170,147,.97) 14px 22px,rgba(226,213,193,.97) 22px 34px);box-shadow:0 0 30px rgba(0,0,0,.35)}
+.dr-win .cl{left:0}.dr-win .cr{right:0}
+.dr-tv{position:absolute;pointer-events:none;opacity:0;transition:opacity 1s;background:radial-gradient(60% 50% at 70% 50%,rgba(120,170,255,.55),transparent 70%),linear-gradient(90deg,rgba(20,40,90,.0),rgba(80,130,255,.25));mix-blend-mode:screen}
+.dr-stage.tv-on .dr-tv{opacity:1;animation:tvf 3s infinite}
+@keyframes tvf{50%{filter:hue-rotate(40deg) brightness(1.2)}}
+.dr-steam{position:absolute;right:5%;top:8%;width:30%;height:70%;opacity:0;transition:opacity 2s;pointer-events:none;background:radial-gradient(50% 60% at 50% 40%,rgba(255,255,255,.45),transparent 70%);filter:blur(10px)}
+.dr-stage.steam .dr-steam{opacity:1;animation:stm 4s ease-in-out infinite}
+@keyframes stm{50%{transform:translateY(-4%) scale(1.05)}}
+.dr-spot{position:absolute;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(8,14,28,.55);border:1px solid rgba(246,220,166,.7);color:var(--gold2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .3s,background .3s;z-index:2}
+.dr-spot svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6}
+.dr-spot i{position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(246,220,166,.55);animation:ping 2.4s infinite}
+@keyframes ping{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.7);opacity:0}}
+.dr-spot span{position:absolute;left:46px;white-space:nowrap;font:400 9.5px var(--mono);letter-spacing:.18em;color:#fff;text-shadow:0 1px 6px #000;opacity:0;transform:translateX(-6px);transition:.3s;pointer-events:none}
+.dr-spot:hover{transform:translate(-50%,-50%) scale(1.12);background:rgba(217,184,120,.3)}.dr-spot:hover span{opacity:1;transform:none}
+.dr-card{position:absolute;right:16px;top:16px;width:min(330px,calc(100% - 32px));padding:18px 18px 14px;z-index:3;opacity:0;transform:translateY(10px);pointer-events:none;transition:.4s}
+.dr-card.on{opacity:1;transform:none;pointer-events:auto}
+.dr-x{position:absolute;right:10px;top:8px;color:var(--muted);font-size:12px}
+.dr-ch{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding-right:20px}
+.dr-ch svg{width:26px;height:26px;fill:none;stroke:var(--gold2);stroke-width:1.4;flex:none}
+.dr-ch small{font:400 9px var(--mono);letter-spacing:.24em;color:var(--gold)}.dr-ch h4{font:500 16px var(--sans);color:#fff}
+.dr-ch .tier{margin-left:auto;font:normal 400 8.5px var(--mono);letter-spacing:.18em;color:var(--ink);background:var(--gold2);padding:3px 7px}
+.dr-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 0;border-top:1px solid rgba(255,255,255,.07)}
+.dr-row small{flex:0 0 100%;font:400 8.5px var(--mono);letter-spacing:.22em;color:var(--muted)}
+.dr-row input[type=range]{flex:1;accent-color:#f6dca6}
+.dr-row b{font:500 13px var(--sans);color:#fff}
+.dr-row .ok{font-size:13px;color:#cfd8ea;line-height:1.45}
+.dr-seg button,.dr-step button,.dr-tog{font:400 10px var(--mono);letter-spacing:.18em;padding:8px 12px;border:1px solid var(--line2);color:var(--muted)}
+.dr-seg button.on,.dr-tog.on{background:var(--gold2);color:var(--ink);border-color:var(--gold2)}
+.dr-step{display:flex;align-items:center;gap:14px}.dr-step button{width:34px;padding:6px 0;font-size:16px}
+.dr-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px}
+.dr-say{display:flex;align-items:center;gap:10px;flex:1;min-width:260px;font-size:14px;color:#dfe6f2;min-height:22px}
+.dr-say svg{width:20px;height:20px;fill:none;stroke:#7fd3ff;stroke-width:1.4;flex:none;animation:spin 8s linear infinite}
+@media (max-width:760px){.dr-spot{width:32px;height:32px}.dr-spot span{display:none}
+  .dr-card{position:relative;right:auto;top:auto;width:100%;margin-top:0;display:none}.dr-card.on{display:block}
+  #daireApp .dr-card{position:absolute;left:8px;right:8px;bottom:8px;top:auto;width:auto}}
+
 </style>
 </head>
 <body>
@@ -941,6 +1001,6 @@ footer .pages a{color:var(--gold2)}
     <div id="arBody"></div>
   </div>
 </div>
-<script src="/app.ce04b8b75c.js"></script>
+<script src="/app.38199f7625.js"></script>
 </body>
 </html>
