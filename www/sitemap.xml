@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://nexeralive.com/</loc><lastmod>2026-10-13</lastmod><priority>1.0</priority></url>
-  <url><loc>https://nexeralive.com/insaat/</loc><lastmod>2026-10-21</lastmod><priority>1.0</priority></url>
-  <url><loc>https://nexeralive.com/technologies/</loc><lastmod>2026-10-21</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/vizyon/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/projeler/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/kentsel-donusum/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/kurumsal/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/erenkoy-3d/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/daire/</loc><lastmod>2026-10-14</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/erenkoy-sokak/</loc><lastmod>2026-10-13</lastmod><priority>0.9</priority></url>
-  <url><loc>https://nexeralive.com/kentsel-donusum-sureci/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://nexeralive.com/riskli-yapi-tespiti/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://nexeralive.com/kadikoy-kentsel-donusum/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://nexeralive.com/erenkoy-kentsel-donusum/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://nexeralive.com/sss/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://nexeralive.com/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/askida/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/askida/gizlilik/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/daire/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/en/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/insaat/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/yabancilar-konut-satin-alma/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/off-plan-vs-completed-property/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/off-plan-vs-completed-property/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/projeden-mi-hazir-mi/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/off-plan-vs-completed-property/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/rental-income-costs-and-risks/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/rental-income-costs-and-risks/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/kira-geliri-giderler-riskler/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/rental-income-costs-and-risks/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/title-deed-checklist/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/title-deed-checklist/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/tapu-kontrol-listesi/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/title-deed-checklist/"/></url>
+  <url><loc>https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/konut-alim-maliyetleri/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/"/></url>
+  <url><loc>https://nexeralive.com/en/privacy/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/privacy/"/><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/gizlilik/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/privacy/"/></url>
+  <url><loc>https://nexeralive.com/erenkoy-3d/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/erenkoy-kentsel-donusum/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/erenkoy-sokak/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/gizlilik/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/gizlilik/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/privacy/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/privacy/"/></url>
+  <url><loc>https://nexeralive.com/insaat/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/insaat/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/"/></url>
+  <url><loc>https://nexeralive.com/kadikoy-kentsel-donusum/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kat-kat/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kat-kat/gizlilik/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kedi-geldi/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kedi-geldi/gizlilik/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kentsel-donusum-sureci/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kentsel-donusum/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/kurumsal/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/metro-jam/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/metro-jam/gizlilik/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/pontis/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/projeler/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/rehber/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/"/></url>
+  <url><loc>https://nexeralive.com/rehber/kira-geliri-giderler-riskler/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/kira-geliri-giderler-riskler/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/rental-income-costs-and-risks/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/rental-income-costs-and-risks/"/></url>
+  <url><loc>https://nexeralive.com/rehber/konut-alim-maliyetleri/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/konut-alim-maliyetleri/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/"/></url>
+  <url><loc>https://nexeralive.com/rehber/projeden-mi-hazir-mi/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/projeden-mi-hazir-mi/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/off-plan-vs-completed-property/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/off-plan-vs-completed-property/"/></url>
+  <url><loc>https://nexeralive.com/rehber/tapu-kontrol-listesi/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/tapu-kontrol-listesi/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/title-deed-checklist/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/title-deed-checklist/"/></url>
+  <url><loc>https://nexeralive.com/rehber/yabancilar-konut-satin-alma/</loc><lastmod>2026-11-06</lastmod><xhtml:link rel="alternate" hreflang="tr" href="https://nexeralive.com/rehber/yabancilar-konut-satin-alma/"/><xhtml:link rel="alternate" hreflang="en" href="https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/"/></url>
+  <url><loc>https://nexeralive.com/riskli-yapi-tespiti/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/sss/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/technologies/</loc><lastmod>2026-11-06</lastmod></url>
+  <url><loc>https://nexeralive.com/vizyon/</loc><lastmod>2026-11-06</lastmod></url>
 </urlset>
