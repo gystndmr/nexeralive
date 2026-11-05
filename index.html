@@ -33,7 +33,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:22p
 .soc a{color:var(--muted);text-decoration:none;transition:color .3s}
 .soc a:hover{color:var(--text)}
 .mid{flex:1}
-.tag{text-align:center;font:11px var(--mono);letter-spacing:.5em;color:rgba(238,242,248,.62);margin-bottom:22px;opacity:0;transform:translateY(10px);transition:1s .9s}
+.tag{margin:0;text-align:center;font:11px var(--mono);letter-spacing:.5em;color:rgba(238,242,248,.62);margin-bottom:22px;opacity:0;transform:translateY(10px);transition:1s .9s}
 .ready .tag{opacity:1;transform:none}
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 clamp(16px,4vw,48px) clamp(18px,4vh,42px);border:1px solid rgba(255,255,255,.1);border-radius:22px;overflow:hidden;background:rgba(8,11,20,.42);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;transform:translateY(24px);transition:opacity 1s 1.1s,transform 1s 1.1s cubic-bezier(.2,.8,.2,1)}
 .ready .choices{opacity:1;transform:none}
@@ -72,7 +72,7 @@ footer{position:fixed;left:0;right:0;bottom:6px;text-align:center;font:9.5px var
 .msoc{display:none;justify-content:center;gap:16px;margin:-8px 0 14px;font:10.5px var(--mono);letter-spacing:.1em}.msoc a{color:var(--muted);text-decoration:none}
 @media (prefers-reduced-motion:reduce){.grain{animation:none}}
 </style>
-</head>
+<script src="/nx.js" defer></script></head>
 <body>
 <canvas id="gl" aria-hidden="true"></canvas>
 <div class="vig"></div><div class="grain"></div>
@@ -82,7 +82,7 @@ footer{position:fixed;left:0;right:0;bottom:6px;text-align:center;font:9.5px var
     <nav class="soc" aria-label="Sosyal medya"><a href="https://www.instagram.com/nexera.34/" target="_blank" rel="noopener"><span class="l">INSTAGRAM · </span>@nexera.34</a><a href="https://www.instagram.com/nexeratechnologies/" target="_blank" rel="noopener">@nexeratechnologies</a></nav>
   </header>
   <div class="mid"></div>
-  <div class="tag">THE NEXT ERA LIVES HERE.</div>
+  <h1 class="tag">THE NEXT ERA LIVES HERE.</h1>
   <nav class="choices" aria-label="NEXERA markaları">
     <a class="choice" data-side="insaat" href="/insaat/"><small>01 · GAYRİMENKUL GELİŞTİRME</small><b>NEXERA <i>İnşaat</i></b><p>Konut projeleri, kentsel dönüşüm ve yapay zekâ ile yaşayan akıllı daireler.</p><span class="go"><i></i>İNŞAAT'A GİRİN</span></a>
     <a class="choice" data-side="tech" href="/technologies/"><small>02 · YAZILIM, OYUN VE YAPAY ZEKÂ</small><b>NEXERA <i>Technologies</i></b><p>iOS ve Android uygulamaları, mobil oyunlar ve yapay zekâ ürünleri.</p><span class="go"><i></i>TECHNOLOGIES'E GİRİN</span></a>

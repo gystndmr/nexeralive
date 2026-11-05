@@ -1,0 +1,31 @@
+﻿soru_id,dil,tür,niyet,soru
+TR01,tr,markasız,yabancı alıcı,"Yabancılar Türkiye'de ev nasıl satın alır, adımlar neler?"
+TR02,tr,markasız,maliyet,"Türkiye'de daire alırken tapu harcı, KDV ve diğer masraflar toplam ne tutar?"
+TR03,tr,markasız,vatandaşlık,Gayrimenkul alarak Türk vatandaşlığı almanın şartları nelerdir?
+TR04,tr,markasız,oturumluk,İstanbul'da oturmak için yeni konut alırken nelere dikkat etmeliyim?
+TR05,tr,markasız,yatırım,Türkiye'de yatırımlık daire nasıl seçilir?
+TR06,tr,markasız,tapu kontrolü,"Ev almadan önce tapuda neleri kontrol etmeliyim? İpotek, haciz, şerh nasıl öğrenilir?"
+TR07,tr,markasız,yeni proje,Projeden ev almak mı hazır daire almak mı daha mantıklı?
+TR08,tr,markasız,kira geliri,İstanbul'da kiraya vermek için daire alırsam hangi giderler ve riskler var?
+TR09,tr,markasız,bölge,Kadıköy'de yeni konut projeleri hangileri? Hangi müteahhitler çalışıyor?
+TR10,tr,markasız,kentsel dönüşüm,Kadıköy'de kentsel dönüşüm için güvenilir müteahhit nasıl seçilir?
+TR11,tr,markasız,bölge,Erenköy'de kentsel dönüşüm projesi yapan firmalar hangileri?
+TR12,tr,markasız,uzaktan alım,"Yurt dışında yaşıyorum, Türkiye'den vekaletle ev alabilir miyim?"
+EN01,en,markasız,foreign buyer,How can a foreigner buy property in Turkey? What are the steps?
+EN02,en,markasız,foreign buyer,Apartments for sale in Istanbul for foreign buyers — where should I start?
+EN03,en,markasız,citizenship,What are the requirements for Turkish citizenship by real estate investment?
+EN04,en,markasız,cost,What is the total cost of buying an apartment in Turkey (taxes and fees)?
+EN05,en,markasız,remote,Can I buy property in Turkey remotely without travelling?
+EN06,en,markasız,investment,Investment property in Istanbul: rental income and ownership costs
+EN07,en,markasız,residence,Does buying property in Turkey give me a residence permit?
+EN08,en,markasız,title deed,What should I check on a Turkish title deed (tapu) before buying?
+EN09,en,markasız,off-plan,Off-plan vs completed property in Istanbul: pros and cons
+EN10,en,markasız,area,Best areas on Istanbul's Asian side to buy an apartment
+EN11,en,markasız,area,"New residential developers in Kadıköy, Istanbul"
+EN12,en,markasız,diaspora,I am a Turkish citizen living abroad; how do I buy a new-build flat in Istanbul?
+BR01,tr,marka,marka,"NEXERA İnşaat kimdir, ne yapar?"
+BR02,tr,marka,marka,NEXERA İnşaat güvenilir mi? Projeleri neler?
+BR03,tr,marka,marka,nexeralive.com hangi firmanın sitesi?
+BR04,en,marka,brand,What is NEXERA İnşaat (Istanbul developer)?
+BR05,en,marka,brand,Does NEXERA İnşaat have apartments for foreign buyers?
+BR06,en,marka,brand,NEXERA Istanbul urban renewal projects Erenköy

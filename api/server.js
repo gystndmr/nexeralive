@@ -48,10 +48,35 @@ function readBody(req){ return new Promise((res, rej) => { let s = ''; req.on('d
 function send(res, code, obj, type = 'application/json'){ res.writeHead(code, { 'Content-Type': type + '; charset=utf-8', 'Cache-Control': 'no-store' }); res.end(type === 'application/json' ? JSON.stringify(obj) : obj); }
 const clean = (v, n = 300) => String(v ?? '').replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n);
 
+const ENUM = {
+  tercih: ['telefon', 'whatsapp', 'eposta'],
+  dil: ['tr', 'en', 'ar', 'ru', 'diger'],
+  para: ['TRY', 'USD', 'EUR', 'GBP'],
+  butce: ['b1', 'b2', 'b3', 'b4', 'b5', 'yok'],
+  amac: ['oturum', 'yatirim', 'kira', 'tatil', 'vatandaslik', 'donusum', 'diger'],
+  zamanlama: ['0-3', '3-6', '6-12', '12+', 'arastirma'],
+  proje: ['karar-yok', 'erenkoy']
+};
+// anonim olay sayacı: kişisel veri, IP, çerez yok; yalnızca gün × olay × sayfa × kaynak türü sayıları
+const EVENTS = DATA + '/olaylar.json';
+const EV_OK = ['sayfa', 'proje_goruntuleme', 'rehberden_projeye', 'iletisim_tel', 'iletisim_whatsapp', 'iletisim_eposta', 'form_acildi', 'form_basarili', 'form_hata'];
+const REF_OK = ['ai', 'arama', 'sosyal', 'dogrudan', 'diger', ''];
+let evs = {}; try { evs = JSON.parse(fs.readFileSync(EVENTS, 'utf8')); } catch {}
+let evDirty = false; setInterval(() => { if (evDirty) { evDirty = false; fs.writeFileSync(EVENTS, JSON.stringify(evs)); } }, 15000);
+function count(e, p, r){ const d = new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Istanbul' }); const key = [d, e, String(p).slice(0, 120), REF_OK.includes(r) ? r : 'diger'].join('|'); evs[key] = (evs[key] || 0) + 1; evDirty = true; }
+
 function saveLead(d, ip){
   const rec = { id: crypto.randomUUID(), zaman: new Date().toISOString(), ip,
     ad: clean(d.ad, 120), telefon: clean(d.telefon, 40), eposta: clean(d.eposta, 120), adres: clean(d.adres, 300),
     konu: clean(d.konu, 120), not: String(d.not || d.mesaj || '').split('\n').map(l => clean(l, 400)).filter(Boolean).join('\n').slice(0, 2000), kaynak: clean(d.kaynak, 30) };
+  // alıcı formu alanları (yalnızca izin verilen değerler saklanır)
+  for (const [k, ok] of Object.entries(ENUM)) { const v = clean(d[k], 40); if (v && ok.includes(v)) rec[k] = v; }
+  if (d.bolge) rec.bolge = clean(d.bolge, 120);
+  if (d.sayfa) rec.sayfa = clean(d.sayfa, 160);
+  if (d.utm) rec.utm = clean(d.utm, 160);
+  if (d.ref) rec.ref = clean(d.ref, 20);
+  if (d.aydinlatma !== undefined) rec.aydinlatma = d.aydinlatma === true;
+  if (d.pazarlama !== undefined) rec.pazarlama = d.pazarlama === true;
   fs.appendFileSync(LEADS, JSON.stringify(rec) + '\n');
   notify(rec).catch(e => console.error('bildirim', e.message));
   return rec;
@@ -60,9 +85,8 @@ function saveLead(d, ip){
 const ascii = s => s.replace(/[^\x20-\x7e]/g, c => ({ 'ı':'i','İ':'I','ş':'s','Ş':'S','ğ':'g','Ğ':'G','ü':'u','Ü':'U','ö':'o','Ö':'O','ç':'c','Ç':'C','²':'2' }[c] || ''));
 async function notify(rec){
   if (!NTFY) return;
-  const ad = rec.ad.split(/\s+/); const kisa = ad[0] + (ad.length > 1 ? ' ' + ad[ad.length - 1][0] + '.' : '');
-  const ozet = (rec.not || '').split('\n')[0].slice(0, 160);
-  const body = [kisa, rec.adres && ('Adres: ' + rec.adres.slice(0, 80)), ozet].filter(Boolean).join('\n');
+  // bildirim yurt dışındaki bir sunucudan geçer: kişisel veri (ad, telefon, adres, mesaj) gönderilmez, ayrıntılar /api/talepler sayfasındadır
+  const body = ['Yeni bir talep geldi.', rec.amac && ('Amaç: ' + rec.amac), rec.dil && ('Dil: ' + rec.dil), rec.sayfa && ('Sayfa: ' + rec.sayfa)].filter(Boolean).join('\n');
   const r = await fetch(NTFY_URL, { method: 'POST', body, headers: { 'Title': ascii('Yeni talep - ' + (KAYNAK[rec.kaynak] || rec.kaynak || 'site')), 'Tags': 'house', 'Priority': '4', 'Click': 'https://nexeralive.com/api/talepler' } });
   if (!r.ok) throw new Error('ntfy ' + r.status);
 }
@@ -94,13 +118,17 @@ async function asistan(body, ip){
 }
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ETIKET = { tercih: 'İletişim tercihi', dil: 'Dil', butce: 'Bütçe', para: 'Para birimi', bolge: 'Bölge', amac: 'Amaç', zamanlama: 'Zamanlama', proje: 'Proje', sayfa: 'Sayfa', ref: 'Geliş', utm: 'UTM' };
+const BUTCE = { TRY: { b1: '< 5 mn', b2: '5–10 mn', b3: '10–20 mn', b4: '20–40 mn', b5: '40 mn +' }, X: { b1: '< 150 bin', b2: '150–300 bin', b3: '300–500 bin', b4: '500 bin – 1 mn', b5: '1 mn +' } };
+function ozetAlici(r){ const o = Object.keys(ETIKET).filter(k => r[k]).map(k => ETIKET[k] + ': ' + (k === 'butce' ? ((BUTCE[r.para === 'TRY' ? 'TRY' : 'X'][r.butce] || r.butce) + ' ' + (r.para || '')) : r[k]));
+  if (r.pazarlama !== undefined) o.push('Pazarlama izni: ' + (r.pazarlama ? 'VAR' : 'yok')); return o.join('\n'); }
 function leadsPage(){
   const sub = NTFY ? `<div class="sub"><b>TELEFONA ANLIK BİLDİRİM</b><p>Yeni talep geldiğinde telefonunuza bildirim düşsün: telefonunuza <a href="https://ntfy.sh/app" target="_blank">ntfy</a> uygulamasını kurun (App Store / Google Play, ücretsiz), <b>+</b> ile abone olun ve şu konu adını yazın:</p><code>${NTFY}</code><p>Ya da telefonda bu bağlantıyı açın: <a href="${NTFY_URL}" target="_blank">${NTFY_URL}</a> · <a href="/api/bildirim-test">Test bildirimi gönder</a></p><small>Bu konu adını kimseyle paylaşmayın. Bildirimde telefon numarası yer almaz; ayrıntılar bu sayfadadır.</small></div>` : '';
   const rows = fs.existsSync(LEADS) ? fs.readFileSync(LEADS, 'utf8').trim().split('\n').filter(Boolean).map(l => JSON.parse(l)).reverse() : [];
   return `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEXERA Talepler</title>
 <style>body{font:14px system-ui;background:#05080f;color:#e8edf6;margin:0;padding:24px}h1{font-weight:500;letter-spacing:.2em;font-size:16px;color:#f6dca6}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #1d2a44;padding:8px;text-align:left;vertical-align:top}th{color:#8c9bb8;font-weight:400;font-size:12px;letter-spacing:.1em}a{color:#f6dca6}td:nth-child(7){white-space:pre-wrap;max-width:420px}.sub{border:1px solid #2a3a5c;padding:14px 18px;margin:0 0 22px;max-width:760px;line-height:1.6}.sub b{color:#f6dca6;font-weight:500}.sub code{display:inline-block;background:#0d1730;padding:6px 10px;margin:4px 0;font-size:15px;user-select:all}.sub small{color:#8c9bb8}</style>
 <h1>NEXERA · TALEPLER (${rows.length})</h1>${sub}<div style="overflow-x:auto"><table><tr><th>ZAMAN</th><th>AD</th><th>TELEFON</th><th>E-POSTA</th><th>ADRES / ADA-PARSEL</th><th>KONU</th><th>NOT</th><th>KAYNAK</th></tr>
-${rows.map(r => `<tr><td>${esc(new Date(r.zaman).toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }))}</td><td>${esc(r.ad)}</td><td><a href="tel:${esc(r.telefon)}">${esc(r.telefon)}</a></td><td>${esc(r.eposta)}</td><td>${esc(r.adres)}</td><td>${esc(r.konu)}</td><td>${esc(r.not)}</td><td>${esc(r.kaynak)}</td></tr>`).join('')}</table></div>`;
+${rows.map(r => `<tr><td>${esc(new Date(r.zaman).toLocaleString('tr-TR', { timeZone: 'Europe/Istanbul' }))}</td><td>${esc(r.ad)}</td><td><a href="tel:${esc(r.telefon)}">${esc(r.telefon)}</a></td><td>${esc(r.eposta)}</td><td>${esc(r.adres)}</td><td>${esc(r.konu)}</td><td>${esc([r.not, ozetAlici(r)].filter(Boolean).join('\n'))}</td><td>${esc(r.kaynak)}</td></tr>`).join('')}</table></div>`;
 }
 
 // AR models are kept in the repo; served here with the MIME types iOS Quick Look / Android Scene Viewer require
@@ -142,11 +170,25 @@ http.createServer(async (req, res) => {
       const rows = fs.existsSync(DIAG) ? fs.readFileSync(DIAG, 'utf8').trim().split('\n').filter(Boolean).slice(-300) : [];
       return send(res, 200, rows.map(r => { try { return JSON.parse(r); } catch { return r; } }));
     }
+    if (req.method === 'POST' && url.pathname === '/api/olay'){
+      if (limited('o' + ip, 300, 10 * 60e3)) return send(res, 204, '', 'text/plain');
+      const b = await readBody(req).catch(() => ({}));
+      const e = clean(b.e, 30); if (EV_OK.includes(e) && e !== 'form_basarili') count(e, clean(b.p, 120).replace(/[?#].*$/, ''), clean(b.r, 12));
+      return send(res, 204, '', 'text/plain');
+    }
+    if (req.method === 'GET' && url.pathname === '/api/olaylar'){
+      const ck = /(?:^|;\s*)nxk=([0-9a-f]+)/.exec(req.headers.cookie || ''); const k = url.searchParams.get('key') || (ck && ck[1]);
+      if (!ADMIN || k !== ADMIN) return send(res, 403, 'yetkisiz', 'text/plain');
+      const rows = Object.entries(evs).map(([key, n]) => { const [gun, olay, sayfa, kaynak] = key.split('|'); return { gun, olay, sayfa, kaynak, n }; }).sort((a, b) => b.gun.localeCompare(a.gun) || b.n - a.n);
+      return send(res, 200, rows);
+    }
     if (req.method === 'POST' && url.pathname === '/api/talep'){
       if (limited('t' + ip, 6, 60 * 60e3)) return send(res, 429, { error: 'çok fazla istek' });
       const b = await readBody(req);
-      if (!clean(b.ad) || !/\d{7,}/.test(String(b.telefon || '').replace(/\D/g, '')) && !/@/.test(String(b.eposta || ''))) return send(res, 400, { error: 'ad ve telefon/e-posta gerekli' });
-      saveLead(b, ip); return send(res, 200, { ok: true });
+      if (b.web) return send(res, 200, { ok: true });            // bot tuzağı alanı doluysa kaydetme
+      if (!clean(b.ad) || !/\d{7,}/.test(String(b.telefon || '').replace(/\D/g, '')) && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(b.eposta || '').trim())) return send(res, 400, { error: 'ad ve telefon/e-posta gerekli' });
+      if (b.kaynak === 'alici-formu' && b.aydinlatma !== true) return send(res, 400, { error: 'aydınlatma metni onayı gerekli' });
+      const rec = saveLead(b, ip); count('form_basarili', rec.sayfa || rec.kaynak || '-', rec.ref || ''); return send(res, 200, { ok: true });
     }
     if (req.method === 'GET' && (url.pathname === '/api/talepler' || url.pathname === '/api/bildirim-test')){
       const ck = /(?:^|;\s*)nxk=([0-9a-f]+)/.exec(req.headers.cookie || ''); const k = url.searchParams.get('key') || (ck && ck[1]);

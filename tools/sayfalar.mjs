@@ -1,12 +1,10 @@
 // Rehber sayfalarını üretir: node tools/sayfalar.mjs  → www/<sayfa>/index.html, www/sitemap.xml, www/robots.txt
 import fs from 'node:fs';
 const OUT = new URL('../www/', import.meta.url).pathname;
-const SITE = 'https://nexeralive.com';
-const TODAY = new Date().toISOString().slice(0, 10);
+const SITE = 'https://nexeralive.com';  // kimlik: tools/kimlik.mjs
+const TODAY = '2026-10-08';  // içerik son kontrol tarihi: yalnızca metinler gerçekten gözden geçirildiğinde değiştirin
 const LOGO = `<svg viewBox="-4 -4 211 155" aria-hidden="true"><path fill="#3d8bff" d="M0 5L42 5L128 72L100 90L40 47L40 135L0 150Z"/><path fill="#3d8bff" d="M96 0L203 73L96 147L96 110L148 73L96 38Z"/></svg>`;
-const ORG = { '@type': 'GeneralContractor', '@id': SITE + '/#nexera', name: 'NEXERA İnşaat', legalName: 'Nexera İnşaat Limited Şirketi', url: SITE, email: 'info@nexeralive.com', telephone: '+90 551 272 06 06', foundingDate: '2015', slogan: 'The next era lives here.', image: SITE + '/og.jpg', logo: SITE + '/og.jpg',
-  address: { '@type': 'PostalAddress', streetAddress: 'Yakacık Çarşı Mah. Rota Sk. B Blok No:1 B', addressLocality: 'Kartal', addressRegion: 'İstanbul', addressCountry: 'TR' },
-  areaServed: ['Kadıköy', 'İstanbul Anadolu Yakası'] };
+import { ORG } from './kimlik.mjs';
 
 const PAGES = [
 { slug: 'kentsel-donusum-sureci', kicker: 'REHBER · SÜREÇ', title: 'Kentsel Dönüşüm Süreci Adım Adım',
@@ -145,8 +143,8 @@ function page(p){
 <meta property="og:type" content="article"><meta property="og:locale" content="tr_TR"><meta property="og:site_name" content="NEXERA İnşaat"><meta property="og:title" content="${esc(p.title)}"><meta property="og:description" content="${esc(p.desc)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${SITE}/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -6 215 160'%3E%3Cpath fill='%233d8bff' d='M0 5L42 5L128 72L100 90L40 47L40 135L0 150Z'/%3E%3Cpath fill='%233d8bff' d='M96 0L203 73L96 147L96 110L148 73L96 38Z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&family=Cormorant+Garamond:wght@400;500&family=JetBrains+Mono:wght@400&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
-<style>${css}</style><script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': ld })}</script></head>
-<body><header><a class="logo" href="/">${LOGO}NEXERA</a><nav><a href="/kentsel-donusum/#test">RİSK TESTİ</a><a href="/kentsel-donusum/#hesapla">HESAPLA</a><a href="/kurumsal/#iletisim">İLETİŞİM</a></nav></header>
+<style>${css}</style><script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': ld })}</script><script src="/nx.js" defer></script></head>
+<body><header><a class="logo" href="/">${LOGO}NEXERA</a><nav><a href="/rehber/">REHBERLER</a><a href="/kentsel-donusum/#test">RİSK TESTİ</a><a href="/kentsel-donusum/#hesapla">HESAPLA</a><a href="/kurumsal/#iletisim">İLETİŞİM</a></nav></header>
 <main><div class="k">${p.kicker}</div><h1>${p.h1}</h1><p class="lead">${p.lead}</p>
 ${body}
 <div class="cta"><b>ÜCRETSİZ ÖN DEĞERLENDİRME</b><p>Binanız için imar durumunu, emsali ve dönüşüm olanaklarını birlikte inceleyelim.</p>
@@ -157,7 +155,5 @@ ${body}
 }
 
 for (const p of PAGES){ fs.mkdirSync(OUT + p.slug, { recursive: true }); fs.writeFileSync(OUT + p.slug + '/index.html', page(p)); }
-fs.writeFileSync(OUT + 'sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  [['', '1.0'], ...PAGES.map(p => [p.slug + '/', '0.8'])].map(([u, pr]) => `  <url><loc>${SITE}/${u}</loc><lastmod>${TODAY}</lastmod><priority>${pr}</priority></url>`).join('\n') + '\n</urlset>\n');
-fs.writeFileSync(OUT + 'robots.txt', `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE}/sitemap.xml\n`);
+// sitemap.xml ve robots.txt artık tools/site-haritasi.mjs ile üretilir (tüm sayfalar, gerçek değişiklik tarihleri)
 console.log('ok', PAGES.length, 'sayfa');
