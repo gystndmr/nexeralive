@@ -21,6 +21,25 @@ if curl -fsSL --max-time 60 "https://codeload.github.com/gystndmr/nexeralive/tar
   if [ -s "$R/guncelle.sh" ] && grep -q "nexeralive" "$R/guncelle.sh" && bash -n "$R/guncelle.sh" && ! cmp -s "$R/guncelle.sh" /usr/local/bin/nexeralive-guncelle; then
     install -m 755 "$R/guncelle.sh" /usr/local/bin/nexeralive-guncelle; echo "$(date -Is) güncelleyici güncellendi"
   fi
+  # www.nexeralive.com → nexeralive.com kalıcı (301) yönlendirme: yalnızca NEXERA'nın kendi Caddy ek dosyası değişir,
+  # HALLET'in ana Caddyfile'ına dokunulmaz; yeni ayar doğrulanamazsa eski dosya geri konur.
+  CADDY=$(docker ps --format '{{.Names}}' | grep -i caddy | head -1 || true)
+  if [ -n "$CADDY" ]; then
+    EK=$(docker inspect -f '{{range .Mounts}}{{if eq .Destination "/etc/caddy/ek"}}{{.Source}}{{end}}{{end}}' "$CADDY" || true); F="$EK/nexeralive.caddy"
+    if [ -n "$EK" ] && [ -f "$F" ] && ! grep -q "redir https://nexeralive.com" "$F"; then
+      P=$(grep -o 'reverse_proxy 127.0.0.1:[0-9]*' "$F" | grep -v ':8091' | head -1 | cut -d: -f2 || true)
+      if [ -n "$P" ]; then
+        cp "$F" "$BASE/nexeralive.caddy.yedek"
+        printf 'nexeralive.com {\n    encode gzip\n    handle /api/* {\n        reverse_proxy 127.0.0.1:8091\n    }\n    handle {\n        reverse_proxy 127.0.0.1:%s\n    }\n}\nwww.nexeralive.com {\n    redir https://nexeralive.com{uri} permanent\n}\n' "$P" > "$F"
+        if docker exec "$CADDY" caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 && docker exec "$CADDY" caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
+          echo "$(date -Is) www yönlendirmesi eklendi"
+        else
+          cp "$BASE/nexeralive.caddy.yedek" "$F"; docker exec "$CADDY" caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1 || true
+          echo "$(date -Is) www yönlendirmesi doğrulanamadı, eski ayar geri kondu"
+        fi
+      fi
+    fi
+  fi
 else
   # yedek yol: yalnızca index.html
   curl -fsSL "https://raw.githubusercontent.com/gystndmr/nexeralive/main/index.html?t=$(date +%s)" -o "$T/i.html" || exit 0
