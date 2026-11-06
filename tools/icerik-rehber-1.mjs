@@ -121,7 +121,7 @@ export const PROJE_TR = {
 <h2>Hazır alırken neye bakılır?</h2>
 <p>Tapu kayıtları, iskân, yapım yılı, aidat borcu ve binanın deprem durumu öne çıkar. Adım adım kontroller için <a href="/rehber/tapu-kontrol-listesi/">tapu kontrol listemize</a> bakın. Eski binalarda, binanın kentsel dönüşüm kapsamına girip girmeyeceğini de sorun.</p>
 <h2>NEXERA’da durum</h2>
-<p>NEXERA’nın Erenköy’deki ilk projesi hazırlık aşamasındadır; daire tipleri, fiyatlar ve teslim tarihi henüz açıklanmadı ve şu an satışta daire yoktur. Satışa açıldığında ruhsat, şartname ve ödeme planı bilgilerini yazılı olarak paylaşacağız.</p>`,
+<p>NEXERA’nın ortağı olduğu Erenköy projesi (3450 ada 186 parsel, 998,99 m²) hazırlık aşamasındadır; daire tipleri, fiyatlar ve teslim tarihi henüz açıklanmadı ve şu an satışta daire yoktur. Satışa açıldığında ruhsat, şartname ve ödeme planı bilgilerini yazılı olarak paylaşacağız.</p>`,
   sources: [
     ['634 sayılı Kat Mülkiyeti Kanunu', MEV(634)],
     ['3194 sayılı İmar Kanunu', MEV(3194)],
@@ -159,7 +159,7 @@ export const PROJE_EN = {
 <h2>Completed: what to check</h2>
 <p>Title-deed records, the occupancy permit, construction year, unpaid dues and the building’s earthquake resistance matter most. Use our <a href="/en/guides/title-deed-checklist/">title deed checklist</a>. In older buildings, also ask whether the building may enter an urban-renewal process.</p>
 <h2>NEXERA today</h2>
-<p>NEXERA’s first project in Erenköy is in pre-construction; unit types, prices and the delivery date have not been announced and no units are on sale yet. When sales open we will provide the permit, specifications and payment plan in writing.</p>`,
+<p>The Erenköy project in which NEXERA is a partner (block 3450, parcel 186, 998.99 m²) is in pre-construction; unit types, prices and the delivery date have not been announced and no units are on sale yet. When sales open we will provide the permit, specifications and payment plan in writing.</p>`,
   sources: [
     ['Condominium Law No. 634 (Turkish)', MEV(634)],
     ['Zoning Law No. 3194 (Turkish)', MEV(3194)],

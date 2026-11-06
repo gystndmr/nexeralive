@@ -5,39 +5,115 @@
       "id": "erenkoy-3450-186",
       "slug": "erenkoy",
       "yayin": true,
-      "ad": { "tr": "Erenköy Kentsel Dönüşüm Projesi", "en": "Erenköy Urban-Renewal Project" },
+      "ad": {
+        "tr": "Erenköy Kentsel Dönüşüm Projesi",
+        "en": "Erenköy Urban-Renewal Project"
+      },
       "proje_turu": "kentsel-donusum-konut",
-      "nexera_rolu": null,
-      "konum": { "ulke": "TR", "sehir": "İstanbul", "ilce": "Kadıköy", "mahalle": "Erenköy", "yayinlanabilir_konum": "Erenköy, Kadıköy" },
-      "parsel": { "ada": "3450", "parsel": "186", "alan_m2": null, "not": "Parsel alanı belgelerde tutarsız; tapu/aplikasyonla tek değere çekilene kadar yayınlanmaz (sitede 1.031 m² yazıyor, kontrol edilmeli)." },
-      "durum": { "insaat": "hazirlik", "satis": "satista-degil", "aciklama_tr": "Hazırlık aşamasında; riskli yapı süreci devam ediyor.", "aciklama_en": "Pre-construction; the risky-building (6306) process is ongoing." },
-      "teslim": { "dogrulanmis_tarih": null, "son_kontrol": "2026-11-06" },
+      "nexera_rolu": "ortak",
+      "konum": {
+        "ulke": "TR",
+        "sehir": "İstanbul",
+        "ilce": "Kadıköy",
+        "mahalle": "Erenköy",
+        "yayinlanabilir_konum": "Erenköy, Kadıköy"
+      },
+      "parsel": {
+        "ada": "3450",
+        "parsel": "186",
+        "alan_m2": 998.99
+      },
+      "durum": {
+        "insaat": "hazirlik",
+        "satis": "satista-degil",
+        "aciklama_tr": "Hazırlık aşamasında; riskli yapı süreci devam ediyor.",
+        "aciklama_en": "Pre-construction; the risky-building (6306) process is ongoing."
+      },
+      "teslim": {
+        "dogrulanmis_tarih": null,
+        "son_kontrol": "2026-11-06"
+      },
       "daire_tipleri": [],
-      "fiyat": { "baslangic": null, "para_birimi": null, "fiyat_tarihi": null, "hangi_secenek": null, "kur_kaynagi": null },
-      "giderler": { "dahil": [], "haric": [] },
+      "fiyat": {
+        "baslangic": null,
+        "para_birimi": null,
+        "fiyat_tarihi": null,
+        "hangi_secenek": null,
+        "kur_kaynagi": null
+      },
+      "giderler": {
+        "dahil": [],
+        "haric": []
+      },
       "odeme_kosullari": null,
-      "tapu_ruhsat": { "tapu_tipi": null, "yapi_ruhsati": null, "iskan": null, "son_kontrol": null },
+      "tapu_ruhsat": {
+        "tapu_tipi": null,
+        "yapi_ruhsati": null,
+        "iskan": null,
+        "son_kontrol": null
+      },
       "sosyal_alanlar": [],
       "teknik_ozellikler": [],
       "ulasim": [],
-      "gorseller": [{ "tur": "render", "aciklama_tr": "Temsilî dış cephe görselleştirmesi", "aciklama_en": "Illustrative exterior visualisation", "url": "/projeler/" }],
-      "vatandaslik_incelemesi": { "durum": "incelenmedi", "tarih": null, "dayanak": null },
+      "gorseller": [
+        {
+          "tur": "render",
+          "aciklama_tr": "Temsilî dış cephe görselleştirmesi",
+          "aciklama_en": "Illustrative exterior visualisation",
+          "url": "/projeler/"
+        }
+      ],
+      "vatandaslik_incelemesi": {
+        "durum": "incelenmedi",
+        "tarih": null,
+        "dayanak": null
+      },
       "son_kontrol": "2026-11-06"
     },
     {
       "id": "esenyali-liva-port",
       "slug": "liva-port",
       "yayin": false,
-      "ad": { "tr": "LIVA PORT", "en": "LIVA PORT" },
+      "ad": {
+        "tr": "LIVA PORT",
+        "en": "LIVA PORT"
+      },
       "proje_turu": "kat-karsiligi-konut",
       "nexera_rolu": null,
-      "konum": { "ulke": "TR", "sehir": "İstanbul", "ilce": "Pendik", "mahalle": "Esenyalı", "yayinlanabilir_konum": null },
-      "durum": { "insaat": "hazirlik", "satis": "satista-degil" },
-      "teslim": { "dogrulanmis_tarih": null, "son_kontrol": null },
+      "konum": {
+        "ulke": "TR",
+        "sehir": "İstanbul",
+        "ilce": "Pendik",
+        "mahalle": "Esenyalı",
+        "yayinlanabilir_konum": null
+      },
+      "durum": {
+        "insaat": "hazirlik",
+        "satis": "satista-degil"
+      },
+      "teslim": {
+        "dogrulanmis_tarih": null,
+        "son_kontrol": null
+      },
       "daire_tipleri": [],
-      "fiyat": { "baslangic": null, "para_birimi": null, "fiyat_tarihi": null, "hangi_secenek": null, "kur_kaynagi": null },
-      "tapu_ruhsat": { "tapu_tipi": null, "yapi_ruhsati": null, "iskan": null, "son_kontrol": null },
-      "vatandaslik_incelemesi": { "durum": "incelenmedi", "tarih": null, "dayanak": null },
+      "fiyat": {
+        "baslangic": null,
+        "para_birimi": null,
+        "fiyat_tarihi": null,
+        "hangi_secenek": null,
+        "kur_kaynagi": null
+      },
+      "tapu_ruhsat": {
+        "tapu_tipi": null,
+        "yapi_ruhsati": null,
+        "iskan": null,
+        "son_kontrol": null
+      },
+      "vatandaslik_incelemesi": {
+        "durum": "incelenmedi",
+        "tarih": null,
+        "dayanak": null
+      },
       "son_kontrol": null,
       "_not": "Şirket onayı olmadan yayınlanmaz."
     }

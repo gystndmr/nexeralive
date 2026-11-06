@@ -4,7 +4,7 @@ import { GUNCEL } from './icerik-ortak.mjs';
 const P = JSON.parse(fs.readFileSync(new URL('./projeler.json', import.meta.url), 'utf8')).projeler.filter(p => p.yayin);
 
 export function projeKartlari(lang){
-  return P.map(p => `<a class="card" href="/projeler/"${lang === 'en' ? ' hreflang="tr"' : ''}><small>${p.konum.yayinlanabilir_konum.toUpperCase()}</small><b>${p.ad[lang]}</b><span>${p.durum['aciklama_' + lang]} ${lang === 'en' ? 'Unit types, prices and delivery dates have not been announced; no units are on sale yet. Visuals are illustrative.' : 'Daire tipleri, fiyat ve teslim tarihi henüz açıklanmadı; şu an satışta daire yok. Görseller temsilîdir.'}</span></a>`).join('');
+  return P.map(p => `<a class="card" href="/projeler/"${lang === 'en' ? ' hreflang="tr"' : ''}><small>${p.konum.yayinlanabilir_konum.toUpperCase()}</small><b>${p.ad[lang]}</b><span>${p.nexera_rolu === 'ortak' ? (lang === 'en' ? 'NEXERA is a partner in this project. ' : 'NEXERA bu projede ortaktır. ') : ''}${p.durum['aciklama_' + lang]} ${lang === 'en' ? 'Unit types, prices and delivery dates have not been announced; no units are on sale yet. Visuals are illustrative.' : 'Daire tipleri, fiyat ve teslim tarihi henüz açıklanmadı; şu an satışta daire yok. Görseller temsilîdir.'}</span></a>`).join('');
 }
 
 export const EN_HOME = (guides) => ({
@@ -19,7 +19,7 @@ export const EN_HOME = (guides) => ({
 <p>We are a developer and builder. We are not a law firm, tax adviser or citizenship consultancy: for legal, tax and immigration matters you should work with an independent, licensed professional. Our guides below explain the general rules with links to the official sources.</p>
 <h2 id="projects">Our projects</h2>
 <div class="cards">${projeKartlari('en')}</div>
-<p class="note">Our project pages are currently in Turkish and include 3D and augmented-reality views. Ask us in English and we will answer any question about a project.</p>
+<p class="note">Our project pages are currently in Turkish and include 3D and augmented-reality views. Ask us in English and we will answer any question about a project — <a href="https://wa.me/905512720606" data-deniz>chat with Deniz, our AI assistant</a>, who replies in English, Arabic, Russian or your own language, or message the team on WhatsApp at +90 551 272 06 06.</p>
 <h2>Guides for buyers and investors</h2>
 <div class="cards">${guides.map(g => `<a class="card" href="${g.path}"><small>${g.kicker}</small><b>${g.title}</b><span>${g.desc}</span></a>`).join('')}</div>`
 });

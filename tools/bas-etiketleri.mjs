@@ -33,6 +33,8 @@ for (const f of files){
   if (path === '/insaat/' && s.includes('<nav class="topnav"') && !s.includes('hreflang="en" lang="en">EN')) s = s.replace(/(<nav class="topnav"[^>]*>[\s\S]*?)(<\/nav>)/, '$1<a href="/en/" hreflang="en" lang="en">EN</a>$2');
   // menü paneli (pages.py): Rehberler bağlantısı
   if (s.includes('href="/technologies/">NEXERA Technologies ↗</a></div>') && !s.includes('href="/rehber/">Alıcı ve yatırımcı rehberleri')) s = s.replace('<div class="pg"><a href="/technologies/">NEXERA Technologies ↗</a></div>', '<div class="pg"><a href="/rehber/">Alıcı ve yatırımcı rehberleri</a></div><div class="pg"><a href="/en/" hreflang="en" lang="en">English</a></div><div class="pg"><a href="/technologies/">NEXERA Technologies ↗</a></div>');
+  // 4a) Deniz (AI danışman) — eski asistanı (app.*.js) taşıyan sayfalar ve tam ekran 3B sayfalar hariç
+  if (['/kentsel-donusum-sureci/', '/riskli-yapi-tespiti/', '/kadikoy-kentsel-donusum/', '/erenkoy-kentsel-donusum/', '/sss/'].includes(path) && !s.includes('src="/danisman.js"')) s = s.replace('</head>', '<script src="/danisman.js" defer></script></head>');
   // 4b) proje görüntüleme ölçümü
   if (['/projeler/', '/erenkoy-3d/', '/erenkoy-sokak/'].includes(path) && !/<body[^>]*data-proje=/.test(s)) s = s.replace(/<body(\s|>)/, '<body data-proje="erenkoy"$1');
   // 5) giriş ekranı: görünen sloganı ana başlık yap
