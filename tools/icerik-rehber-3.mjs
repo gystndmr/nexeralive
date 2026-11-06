@@ -144,7 +144,7 @@ export const AKILLI_TR = {
 <h2>6. Teslimde isteyin</h2>
 <p>Kurulu cihaz listesi ve seri numaraları, ağ ve pano şeması, kullanıcı ve yönetici hesaplarının devri, garanti belgeleri ve kısa bir kullanım eğitimi. Projeden alımlarda bu kalemlerin satış sözleşmesine ya da şartnameye yazılması gerekir.</p>
 <h2>NEXERA ALIVE</h2>
-<p>NEXERA, konut projelerinde akıllı yaşamı inşaat aşamasından itibaren altyapı olarak planlar ve bunu NEXERA ALIVE adı altında paketler: Base ALIVE, ALIVE+ ve SIGNATURE. Paketlerin içeriği ve hangi projede sunulduğu, ilgili proje satışa açıldığında şartnameyle birlikte yazılı olarak yayınlanacaktır. Şu an satışta daire bulunmamaktadır.</p>`,
+<p>NEXERA, konut projelerinde akıllı yaşamı inşaat aşamasından itibaren altyapı olarak planlar ve bunu NEXERA ALIVE adı altında sunar: daireye dahil <b>Base ALIVE</b> (aydınlatma, iklim, temel güvenlik, mobil erişim), <b>ALIVE+</b> (gelişmiş senaryolar, çoklu ortam, enerji optimizasyonu) ve <b>SIGNATURE</b> (yapay zekâ entegrasyonu, özel senaryo tasarımı, 7/24 danışmanlık). Ayrıntılar <a href="/nexera-alive/">NEXERA ALIVE sayfasında</a>; projeye göre şartname ve fiyatlar proje satışa açıldığında yazılı olarak yayınlanır. Şu an satışta daire bulunmamaktadır.</p>`,
   sources: [
     ['KNX Association — KNX standardı', 'https://www.knx.org/'],
     ['Connectivity Standards Alliance — Matter', 'https://csa-iot.org/all-solutions/matter/'],
@@ -186,7 +186,7 @@ export const AKILLI_EN = {
 <h2>6. Ask for at handover</h2>
 <p>A device list with serial numbers, network and panel diagrams, transfer of user and admin accounts, warranty documents and a short training. When buying off-plan, these items should be written into the sales contract or specification.</p>
 <h2>NEXERA ALIVE</h2>
-<p>NEXERA plans smart living as building infrastructure from the construction stage and packages it as NEXERA ALIVE: Base ALIVE, ALIVE+ and SIGNATURE. Package contents and the projects they apply to will be published in writing with the specification when a project opens for sale. No units are on sale at the moment.</p>`,
+<p>NEXERA plans smart living as building infrastructure from the construction stage as NEXERA ALIVE: <b>Base ALIVE</b>, included with the apartment (lighting, climate, basic security, mobile access), <b>ALIVE+</b> (advanced scenarios, multi-room media, energy optimisation) and <b>SIGNATURE</b> (AI integration, custom scenario design, 24/7 concierge). See the <a href="/en/nexera-alive/">NEXERA ALIVE page</a>; specifications and prices per project are published in writing when a project opens for sale. No units are on sale at the moment.</p>`,
   sources: [
     ['KNX Association — the KNX standard', 'https://www.knx.org/'],
     ['Connectivity Standards Alliance — Matter', 'https://csa-iot.org/all-solutions/matter/'],

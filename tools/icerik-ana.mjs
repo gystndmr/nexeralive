@@ -16,6 +16,7 @@ export const EN_HOME = (guides) => ({
   body: `
 <h2>What we do</h2>
 <p>We design and build new residential buildings, including urban-renewal projects carried out together with the owners of existing buildings under Türkiye’s Law No. 6306 on the transformation of areas under disaster risk. Our focus is earthquake safety, transparent agreements with owners and a calm, timeless architecture.</p>
+<p>Every NEXERA home is built around <a href="/en/nexera-alive/">NEXERA ALIVE</a>, our smart-living platform: Base ALIVE included with the apartment, with ALIVE+ and SIGNATURE tiers adding advanced automation and AI integration.</p>
 <p>We are a developer and builder. We are not a law firm, tax adviser or citizenship consultancy: for legal, tax and immigration matters you should work with an independent, licensed professional. Our guides below explain the general rules with links to the official sources.</p>
 <h2 id="projects">Our projects</h2>
 <div class="cards">${projeKartlari('en')}</div>
@@ -38,6 +39,8 @@ export const TR_REHBER = (guides) => ({
   desc: 'Türkiye’de konut alırken toplam maliyet, tapu kontrolü, projeden mi hazır mı, kira geliri ve yabancıların konut alımı: resmî kaynaklı, sade rehberler.',
   lead: 'Her rehber gerçek bir karar sorusuna yanıt verir, kontrol ettiğimiz resmî kaynakları ve son kontrol tarihini gösterir. Genel bilgilendirme amaçlıdır; hukuki danışmanlık yerine geçmez.',
   body: `<div class="cards">${guides.map(g => `<a class="card" href="${g.path}"><small>${g.kicker}</small><b>${g.title}</b><span>${g.desc}</span></a>`).join('')}</div>
+<h2>Akıllı yaşam</h2>
+<div class="cards"><a class="card" href="/nexera-alive/"><small>NEXERA ALIVE</small><b>NEXERA ALIVE: yaşayan akıllı daire</b><span>Base ALIVE, ALIVE+ ve SIGNATURE katmanları; aydınlatma, iklim, güvenlik, enerji ve yapay zekâ.</span></a></div>
 <h2>Kentsel dönüşüm rehberleri</h2>
 <div class="cards"><a class="card" href="/kentsel-donusum-sureci/"><small>SÜREÇ</small><b>Kentsel dönüşüm süreci adım adım</b></a><a class="card" href="/riskli-yapi-tespiti/"><small>TESPİT</small><b>Riskli yapı tespiti nedir?</b></a><a class="card" href="/kadikoy-kentsel-donusum/"><small>KADIKÖY</small><b>Kadıköy’de kentsel dönüşüm</b></a><a class="card" href="/erenkoy-kentsel-donusum/"><small>ERENKÖY</small><b>Erenköy’de kentsel dönüşüm</b></a><a class="card" href="/sss/"><small>SSS</small><b>Sık sorulan sorular</b></a></div>`
 });

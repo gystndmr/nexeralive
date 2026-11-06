@@ -7,7 +7,10 @@ Facts (checked 2026-11-06):
 - NEXERA is a developer and builder, not a law firm, tax adviser or citizenship consultancy. The guides below are general information with official sources.
 - Visitors can chat with NEXERA's AI assistant on the site in Turkish, English, Arabic, Russian and other languages.
 
+- NEXERA ALIVE is NEXERA's smart-living platform: Base ALIVE (included: lighting, climate, basic security, mobile access), ALIVE+ (advanced scenarios, multi-room media, energy optimisation), SIGNATURE (AI integration, custom scenarios, 24/7 concierge).
+
 ## English
+- [NEXERA ALIVE smart apartments](https://nexeralive.com/en/nexera-alive/)
 - [Home (English)](https://nexeralive.com/en/): who NEXERA is, projects, contact
 - [Buying property in Türkiye as a foreigner](https://nexeralive.com/en/guides/buying-property-in-turkey-as-a-foreigner/)
 - [Total cost of buying property in Türkiye](https://nexeralive.com/en/guides/total-cost-of-buying-property-in-turkey/)
@@ -20,6 +23,8 @@ Facts (checked 2026-11-06):
 ## Türkçe
 - [NEXERA İnşaat](https://nexeralive.com/insaat/)
 - [Projeler](https://nexeralive.com/projeler/)
+- [NEXERA ALIVE akıllı daire](https://nexeralive.com/nexera-alive/)
+- [3B NEXERA dairesi](https://nexeralive.com/daire/)
 - [Alıcı ve yatırımcı rehberleri](https://nexeralive.com/rehber/)
 - [Akıllı daire alırken nelere bakılmalı](https://nexeralive.com/rehber/akilli-daire-rehberi/)
 - [Kentsel dönüşümde müteahhit seçimi](https://nexeralive.com/rehber/kentsel-donusum-muteahhit-secimi/)
