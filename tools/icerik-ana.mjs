@@ -20,7 +20,7 @@ export const EN_HOME = (guides) => ({
 <p>We are a developer and builder. We are not a law firm, tax adviser or citizenship consultancy: for legal, tax and immigration matters you should work with an independent, licensed professional. Our guides below explain the general rules with links to the official sources.</p>
 <h2 id="projects">Our projects</h2>
 <div class="cards">${projeKartlari('en')}</div>
-<p class="note">Our project pages are currently in Turkish and include 3D and augmented-reality views. Ask us in English and we will answer any question about a project — <a href="https://wa.me/902162350432" data-deniz>chat with Deniz, our AI assistant</a>, who replies in English, Arabic, Russian or your own language, or message the team on WhatsApp at +90 551 272 06 06.</p>
+<p class="note">Our project pages are currently in Turkish and include 3D and augmented-reality views. Ask us in English and we will answer any question about a project — <a href="https://wa.me/902162350738" data-deniz>chat with Deniz, our AI assistant</a>, who replies in English, Arabic, Russian or your own language, or message the team on WhatsApp at +90 551 272 06 06.</p>
 <h2>Guides for buyers and investors</h2>
 <div class="cards">${guides.map(g => `<a class="card" href="${g.path}"><small>${g.kicker}</small><b>${g.title}</b><span>${g.desc}</span></a>`).join('')}</div>`
 });

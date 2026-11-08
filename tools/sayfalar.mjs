@@ -148,7 +148,7 @@ function page(p){
 <main><div class="k">${p.kicker}</div><h1>${p.h1}</h1><p class="lead">${p.lead}</p>
 ${body}
 <div class="cta"><b>ÜCRETSİZ ÖN DEĞERLENDİRME</b><p>Binanız için imar durumunu, emsali ve dönüşüm olanaklarını birlikte inceleyelim.</p>
-<div class="btns"><a href="/kentsel-donusum/#test">RİSK TESTİ →</a><a href="/kentsel-donusum/#hesapla">BİNAM NE KAZANIR? →</a><a class="wa" href="https://wa.me/902162350432?text=${encodeURIComponent('Merhaba, binam için ön değerlendirme istiyorum.')}">WHATSAPP</a><a href="tel:+905512720606">0551 272 06 06</a></div></div>
+<div class="btns"><a href="/kentsel-donusum/#test">RİSK TESTİ →</a><a href="/kentsel-donusum/#hesapla">BİNAM NE KAZANIR? →</a><a class="wa" href="https://wa.me/902162350738?text=${encodeURIComponent('Merhaba, binam için ön değerlendirme istiyorum.')}">WHATSAPP</a><a href="tel:+905512720606">0551 272 06 06</a></div></div>
 <nav class="more"><b>DİĞER REHBERLER</b>${others}</nav></main>
 <footer><span>© ${new Date().getFullYear()} NEXERA İNŞAAT LTD. ŞTİ.</span><span>Yakacık Çarşı Mah. Rota Sk. B Blok No:1 B, Kartal / İstanbul</span><span><a href="mailto:info@nexeralive.com">info@nexeralive.com</a> · <a href="tel:+905512720606">+90 551 272 06 06</a></span></footer>
 </body></html>`;
