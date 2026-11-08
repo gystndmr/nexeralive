@@ -59,11 +59,11 @@
 
   // güvenli metin + yalnızca site içi yollar, e-posta, telefon ve wa.me bağlantıya dönüşür
   function render(el, text){
-    var re = /(https?:\/\/(?:www\.)?(?:nexeralive\.com|wa\.me)\/[^\s)]*|\/(?:en|rehber|gizlilik|projeler|insaat|erenkoy-3d|kentsel-donusum[\w-]*|riskli-yapi-tespiti|sss)\/[\w\/-]*|[\w.+-]+@[\w-]+\.[\w.]+|\+90 ?551 ?272 ?06 ?06)/g, last = 0, m;
+    var re = /(https?:\/\/(?:www\.)?(?:nexeralive\.com|wa\.me)\/[^\s)]*|\/(?:en|rehber|gizlilik|projeler|insaat|erenkoy-3d|kentsel-donusum[\w-]*|riskli-yapi-tespiti|sss)\/[\w\/-]*|[\w.+-]+@[\w-]+\.[\w.]+|\+90 ?551 ?272 ?06 ?06|\+90 ?216 ?235 ?04 ?32)/g, last = 0, m;
     while ((m = re.exec(text))){
       el.appendChild(document.createTextNode(text.slice(last, m.index)));
       var a = document.createElement('a'), v = m[0].replace(/[.,]$/, ''); a.textContent = v;
-      a.href = v.indexOf('@') > 0 ? 'mailto:' + v : /^\+90/.test(v) ? 'https://wa.me/905512720606' : v;
+      a.href = v.indexOf('@') > 0 ? 'mailto:' + v : /^\+90/.test(v) ? 'https://wa.me/902162350432' : v;
       if (/^https?:|wa\.me/.test(a.href) && a.host !== location.host){ a.target = '_blank'; a.rel = 'noopener'; }
       el.appendChild(a); last = m.index + v.length; re.lastIndex = last;
     }
@@ -83,7 +83,7 @@
     fetch('/api/asistan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: hist, dil: L, sayfa: location.pathname }) })
       .then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function(j){ t.remove(); var a = String(j.reply || '').trim() || '…'; st.m.push({ role: 'assistant', content: a }); save(); add('assistant', a); })
-      .catch(function(){ t.remove(); var d = add('assistant', T.err + ' '); var a = document.createElement('a'); a.href = 'https://wa.me/905512720606'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = T.wa; d.appendChild(a); st.m.pop(); save(); })
+      .catch(function(){ t.remove(); var d = add('assistant', T.err + ' '); var a = document.createElement('a'); a.href = 'https://wa.me/902162350432'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = T.wa; d.appendChild(a); st.m.pop(); save(); })
       .then(function(){ busy = false; sb.disabled = false; ta.focus(); });
   }
   function open(v){ st.open = v; save(); w.classList.toggle('on', v); b.style.display = v ? 'none' : ''; if (v){ draw(); ev('danisman_acildi'); setTimeout(function(){ ta.focus(); }, 50); } else b.focus(); }

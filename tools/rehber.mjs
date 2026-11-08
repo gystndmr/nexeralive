@@ -71,7 +71,7 @@ function form(lang, ctx = {}){
   const sel = (n, list, first = '—') => `<select id="f-${n}" name="${n}"><option value="">${first}</option>${list.map(([v, t]) => `<option value="${v}">${t}</option>`).join('')}</select>`;
   const amacSel = ctx.amac ? L.amaclar.map(([v, t]) => `<option value="${v}"${v === ctx.amac ? ' selected' : ''}>${t}</option>`).join('') : null;
   return `<section class="cta" id="${en ? 'contact' : 'iletisim'}" aria-labelledby="f-h"><b>${en ? 'CONTACT' : 'İLETİŞİM'}</b><p id="f-h">${L.h}</p><p style="font:400 15px/1.6 Manrope;color:#c9d2e4;margin-top:8px">${L.p}</p>
-<div class="btns"><a class="wa" href="https://wa.me/905512720606">WHATSAPP</a><a href="tel:+905512720606">+90 551 272 06 06</a><a href="mailto:info@nexeralive.com">INFO@NEXERALIVE.COM</a></div>
+<div class="btns"><a class="wa" href="https://wa.me/902162350432">WHATSAPP</a><a href="tel:+905512720606">+90 551 272 06 06</a><a href="mailto:info@nexeralive.com">INFO@NEXERALIVE.COM</a></div>
 <form class="f" data-nx-form data-lang="${lang}" novalidate>
 <div><label for="f-ad">${L.ad}</label><input type="text" id="f-ad" name="ad" autocomplete="name" required maxlength="120"></div>
 <div><label for="f-dil">${L.dil}</label>${sel('dil', L.diller).replace(`value="${lang}"`, `value="${lang}" selected`)}</div>
