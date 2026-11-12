@@ -2,6 +2,20 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
+<script>
+/* Android: Play Store uygulamasını doğrudan aç (Meta uygulama-içi tarayıcıda da), gelen utm_* referrer'a taşınır; bekleme yok. */
+(function(){
+  var PKG="com.nexera.kedigeldi",CMP="kedigeldi_trafik",u=navigator.userAgent||"";
+  if(/facebookexternalhit|Facebot|bot|crawl|spider/i.test(u)||!/android/i.test(u))return;
+  var q,r={utm_source:"meta",utm_medium:"paid",utm_campaign:CMP},k,ref=[];
+  try{q=new URLSearchParams(location.search);["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(n){var v=q.get(n);if(v)r[n]=v.slice(0,80)})}catch(e){}
+  for(k in r)ref.push(k+"="+encodeURIComponent(r[k]));
+  ref=encodeURIComponent(ref.join("&"));
+  var web="https://play.google.com/store/apps/details?id="+PKG+"&referrer="+ref;
+  try{location.replace("intent://details?id="+PKG+"&referrer="+ref+"#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url="+encodeURIComponent(web)+";end")}catch(e){location.replace(web);return}
+  setTimeout(function(){if(document.visibilityState!=="hidden")location.replace(web)},700);
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kedi Geldi — Ücretsiz indir</title>
 <meta name="description" content="İstanbul'un mahalle dükkânlarında siparişleri hazırla, kediye dikkat et. Google Play'de ücretsiz.">
@@ -19,14 +33,6 @@ img{width:84px;height:84px;border-radius:20px}
 p{color:#a8b3c9;margin:0}
 a.b{display:block;width:100%;max-width:320px;padding:15px 0;border-radius:14px;font-weight:800;text-decoration:none;background:linear-gradient(180deg,#ffb15c,#ff8a2a);color:#1a0e00}
 </style>
-<script>
-(function(){
-  var GP="https://play.google.com/store/apps/details?id=com.nexera.kedigeldi&referrer=utm_source%3Dmeta%26utm_medium%3Dpaid%26utm_campaign%3Dkedigeldi_trafik",
-      u=navigator.userAgent||"";
-  if(/facebookexternalhit|Facebot|bot|crawl|spider/i.test(u))return;
-  if(/android/i.test(u))location.replace(GP);
-})();
-</script>
 <script src="/nx.js" defer></script></head>
 <body>
 <div class="w">
