@@ -1,0 +1,8 @@
+{
+  "guncelleme": "25.11.2026",
+  "aciklama": "Satılık olmayan daireleri buraya yazın: \"Opsiyonlu\" veya \"Satıldı\". Örnek: \"A\": {\"54\": \"Opsiyonlu\"}",
+  "durum": {
+    "A": {},
+    "B": {}
+  }
+}

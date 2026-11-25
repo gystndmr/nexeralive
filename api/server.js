@@ -18,7 +18,7 @@ const AR_SRC = 'https://raw.githubusercontent.com/gystndmr/nexeralive/';
 // phone push notifications for new leads via ntfy (topic is secret, derived from ADMIN_KEY unless NTFY_TOPIC is set)
 const NTFY = process.env.NTFY_TOPIC || (ADMIN ? 'nexera-' + crypto.createHash('sha256').update('nexera-ntfy:' + ADMIN).digest('hex').slice(0, 20) : '');
 const NTFY_URL = (process.env.NTFY_SERVER || 'https://ntfy.sh') + '/' + NTFY;
-const KAYNAK = { 'form':'İletişim formu', 'asistan-ai':'Deniz (AI danışman)', 'asistan':'NEXERA Asistan', 'hesaplayici':'Binam ne kazanır?', 'risk-testi':'Riskli yapı testi' };
+const KAYNAK = { 'form':'İletişim formu', 'asistan-ai':'Deniz (AI danışman)', 'asistan':'NEXERA Asistan', 'hesaplayici':'Binam ne kazanır?', 'risk-testi':'Riskli yapı testi', 'port':'NEXERA PORT daire seçimi' };
 fs.mkdirSync(DATA, { recursive: true });
 
 // BILGI:BASLA
