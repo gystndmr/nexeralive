@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEXERA PORT · Daire Seç ve Ödeme Planı | NEXERA İnşaat</title>
+<meta name="description" content="NEXERA PORT, Pendik Esenyalı: bina şemasından dairenizi seçin; fiyatını, peşin indirimini ve 36, 24, 12 ay faizsiz ödeme planlarını TL ve USD olarak görün.">
+<link rel="canonical" href="https://nexeralive.com/port/">
+<meta property="og:title" content="NEXERA PORT · Dairenizi seçin, ödeme planınızı görün">
+<meta property="og:description" content="Pendik Esenyalı · 1+1 ve 2+1 daireler · %50 peşinat, 36/24/12 ay faizsiz taksit">
+<meta property="og:image" content="https://nexeralive.com/og.jpg">
+<meta property="og:url" content="https://nexeralive.com/port/">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: müşteriye dönük, sakin ve güven veren; satış ofisindeki maket masası gibi.
+   IDEA: satış ofisindeki bina cephe şeması — kat kat daireler, dokununca dairenin kartı açılır.
+   PICTURE: blok şeması (katlar satır, daireler kutu), seçili daire altın çerçeveyle; yanında ödeme planı kartı.
+   COLOUR and TYPE: NEXERA laciverti #14213d, altın #c9a24a, 1+1 yeşil, 2+1 mavi; Manrope.
+   LAYOUT: lacivert üst bant, blok sekmeleri, şema; altında daire kartı + plan seçimi + ay ay tablo. */
+:root{color-scheme:light dark;--bg:light-dark(#f4f5f8,#0c1222);--paper:light-dark(#fff,#141c30);--ink:light-dark(#14213d,#e9edf6);--mut:light-dark(#5b6475,#9aa4b8);--line:light-dark(#e1e5ec,#26304a);--navy:#14213d;--gold:#c9a24a;--gold2:light-dark(#9c7a2c,#e1c27a);--soft:light-dark(#f7f1e3,#2a2516);--t1:light-dark(#d6f3ea,#173a30);--t1b:#2aa37f;--t2:light-dark(#dde6fb,#1b2a4d);--t2b:#3c64d6;--off:light-dark(#eef0f3,#1a2133)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Manrope,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(20px,3vw,36px) max(4vw,14px)}
+header{background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{margin:0;font-size:clamp(26px,3.4vw,40px);line-height:1.05;font-weight:800;text-wrap:balance}
+header p{margin:6px 0 0;opacity:.82;font-size:15px}
+.logo{background:#fff;border-radius:12px;padding:6px 14px}.logo img{height:44px;display:block}
+.wrap{max-width:1240px;margin:0 auto}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.tabs button,.seg button{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:700 15px Manrope,sans-serif;cursor:pointer}
+.tabs button[aria-pressed=true],.seg button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-left:auto}.leg i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:5px}
+.scroll{overflow-x:auto;padding-bottom:4px}
+.bld{border-collapse:separate;border-spacing:4px;margin:0 auto}
+.bld th{font-size:12px;color:var(--mut);text-align:right;white-space:nowrap;padding-right:6px;position:sticky;left:0;background:var(--paper);z-index:1}
+.bld td{padding:0}
+.u{width:66px;height:64px;border-radius:9px;border:1.5px solid transparent;font:inherit;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;padding:2px}
+.u b{font-size:14px}.u small{font-size:10.5px;color:var(--mut)}.u em{font-style:normal;font-size:11px;font-weight:800}
+.u.t1{background:var(--t1);border-color:var(--t1b)}.u.t2{background:var(--t2);border-color:var(--t2b)}
+.u.off{background:var(--off);border:1.5px dashed var(--line);cursor:default;color:var(--mut)}
+.u.sel{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 6px 16px rgba(201,162,74,.4)}
+.u:focus-visible{outline:3px solid var(--gold)}
+.st{width:24px;height:64px;border-radius:6px;background:repeating-linear-gradient(0deg,transparent 0 6px,var(--line) 6px 7px)}
+.base{text-align:center;font-size:11px;letter-spacing:.5px;color:var(--mut);background:var(--off);border-radius:8px;padding:6px}
+.hint{font-size:13px;color:var(--mut);margin:10px 0 0}
+.det{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px;margin-top:20px}
+@media(max-width:860px){.det{grid-template-columns:minmax(0,1fr)}}
+.ut h2{margin:0;font-size:clamp(24px,3vw,32px);line-height:1.1}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.tags span{background:var(--soft);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:700}
+.price{font-size:clamp(28px,3.6vw,40px);font-weight:800;white-space:nowrap}
+.k{font-size:13px;color:var(--mut);font-weight:700}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.v{font-size:20px;font-weight:800;white-space:nowrap}
+.seg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.seg.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:220px}
+label.l{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:12px 0 6px}
+.sum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 6px}
+@media(max-width:600px){.sum{grid-template-columns:minmax(0,1fr)}}
+.big{color:var(--gold2)}.sub{font-size:12.5px;color:var(--mut);font-weight:600}
+.strip{display:flex;align-items:flex-end;gap:2px;height:90px;margin-top:10px}
+.strip i{flex:1;background:linear-gradient(180deg,#3c5aa8,var(--navy));border-radius:3px 3px 0 0}.strip i.d{flex:0 0 64px;background:linear-gradient(180deg,#e0bd6b,var(--gold));border-radius:7px 7px 0 0}
+details{margin-top:14px}summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}
+table.t{width:100%;border-collapse:collapse;font-size:14.5px}
+table.t th,table.t td{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+table.t th{font-size:12.5px;color:var(--mut)}.n{text-align:right!important;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.dp td{background:var(--soft);font-weight:700}tr.tot td{font-weight:800}
+.cta{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:12px;background:var(--gold);color:#14213d;font-weight:800;text-decoration:none;margin-top:14px}
+.note{font-size:12.5px;color:var(--mut);margin-top:12px}
+footer{font-size:13px;color:var(--mut);text-align:center}
+</style></head><body>
+<header class="band"><div><h1>NEXERA PORT · Dairenizi seçin, ödeme planınızı görün</h1><p>Pendik / Esenyalı · Fiyat listesi 22.11.2026 · Fiyatlar KDV dahil</p></div><div class="logo"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSI0MCAzOCA3NjAgNTY2Ij4KPHBhdGggZmlsbC1ydWxlPSJub256ZXJvIiBmaWxsPSJyZ2IoMTguNDY5MjM4JSwgMzMuODAxMjclLCA2NC4zNzM3NzklKSIgZmlsbC1vcGFjaXR5PSIxIiBkPSJNIDIxMC42NjAxNTYgNjMuNjk5MjE5IEwgMjk0LjU5NzY1NiA2My42OTkyMTkgTCA0OTkuMTg3NSAyMDcuNTg5ODQ0IEwgNDI0LjI0NjA5NCAyNTYuMzAwNzgxIEwgMjk2Ljg0Mzc1IDE2My4zNzUgTCAyOTYuODQzNzUgMzI4LjI0NjA5NCBMIDIxMC42NjAxNTYgMzc5LjIwNzAzMSBaIE0gMjEwLjY2MDE1NiA2My42OTkyMTkgIi8+CjxwYXRoIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0icmdiKDE4LjQ2OTIzOCUsIDMzLjgwMTI3JSwgNjQuMzczNzc5JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSA0MjAuNSA0NS43MTQ4NDQgTCA2NTUuMDY2NDA2IDIxMC41ODU5MzggTCA0MjAuNSAzNzMuOTYwOTM4IEwgNDIwLjUgMjg1LjUyNzM0NCBMIDUzNC40MTAxNTYgMjA5LjA4NTkzOCBMIDQyMC41IDEyOC44OTg0MzggWiBNIDQyMC41IDQ1LjcxNDg0NCAiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsPSJyZ2IoNy40NzY4MDclLCA2LjUwMDI0NCUsIDUuNzQzNDA4JSkiIGZpbGwtb3BhY2l0eT0iMSIgZD0iTSA0OC4wMzkwNjIgNTQ5LjMyNDIxOSBMIDQ4LjAzOTA2MiA1MDIuMTA5Mzc1IEwgNzEuMjY5NTMxIDUwMi4yNDIxODggTCAxNDAuMjE4NzUgNTY5LjI2OTUzMSBMIDE0MC42MTcxODggNTM2LjYyMTA5NCBMIDE0MS4wMjM0MzggNTAzLjk3MjY1NiBMIDE0NS42NzU3ODEgNTAzLjAzOTA2MiBDIDE0OC4yMzgyODEgNTAyLjUzMTI1IDE1Mi42MDkzNzUgNTAyLjEwOTM3NSAxNTUuMzk0NTMxIDUwMi4xMDkzNzUgTCAxNjAuNDQ5MjE5IDUwMi4xMDkzNzUgTCAxNjAuNDQ5MjE5IDU5Ni44Mzk4NDQgTCAxMzguNzE4NzUgNTk0Ljc4MTI1IEwgMTA0LjA2NjQwNiA1NjAuMjYxNzE5IEwgNjkuNDEwMTU2IDUyNS43NSBMIDY4LjM1MTU2MiA1MzUuNjM2NzE5IEMgNjcuNzY5NTMxIDU0MS4wNjY0MDYgNjcuNDEwMTU2IDU1NC40NjQ4NDQgNjcuNTU0Njg4IDU2NS40MDYyNSBDIDY3LjcwMzEyNSA1NzYuMzQzNzUgNjcuNzUzOTA2IDU4Ny44MjQyMTkgNjcuNjcxODc1IDU5MC45MTQwNjIgTCA2Ny41MjM0MzggNTk2LjUzNTE1NiBMIDQ4LjAzOTA2MiA1OTYuNTM1MTU2IFogTSAxODkuNTExNzE5IDU5NS4zMzU5MzggTCAxODQuODUxNTYyIDU5NC44Nzg5MDYgTCAxODMuODM1OTM4IDU3OC44NDc2NTYgQyAxODMuMjc3MzQ0IDU3MC4wMzEyNSAxODIuODk4NDM4IDU0OS41NzgxMjUgMTgyLjk5MjE4OCA1MzMuMzk4NDM4IEwgMTgzLjE2NDA2MiA1MDMuOTg0Mzc1IEwgMTkwLjAwMzkwNiA1MDMuMDQ2ODc1IEMgMTk4Ljk1NzAzMSA1MDEuODIwMzEyIDI2Ni42MDE1NjIgNTAxLjgzMjAzMSAyNzIuNzUgNTAzLjA2MjUgQyAyNzcuMzU1NDY5IDUwMy45ODQzNzUgMjc3LjQ5MjE4OCA1MDQuMjM0Mzc1IDI3Ny4wNTg1OTQgNTEwLjkyOTY4OCBMIDI3Ni42MDkzNzUgNTE3Ljg0NzY1NiBMIDIwMy45MTc5NjkgNTE4LjY1MjM0NCBMIDIwMy45MTc5NjkgNTQxLjA3ODEyNSBMIDI3MS4zNjMyODEgNTQxLjA3ODEyNSBMIDI3MS4zNjMyODEgNTU2LjA2NjQwNiBMIDIwMy45MTc5NjkgNTU2LjA2NjQwNiBMIDIwMy45MTc5NjkgNTgwLjA1MDc4MSBMIDI3OS4wMTU2MjUgNTgwLjA1MDc4MSBMIDI3OC4xMDkzNzUgNTk1LjcyMjY1NiBMIDIzNi4xNDA2MjUgNTk1Ljc1NzgxMiBDIDIxMy4wNTg1OTQgNTk1Ljc2OTUzMSAxOTIuMDc0MjE5IDU5NS41ODU5MzggMTg5LjUxMTcxOSA1OTUuMzM1OTM4IFogTSAzNjkuMjEwOTM4IDU3OS4yODkwNjIgTCAzNTIuMzk0NTMxIDU2MS43NjU2MjUgTCAzMjAuNDgwNDY5IDU5NS4wMzkwNjIgTCAyOTMuMTMyODEyIDU5NS4wMzkwNjIgTCAzMTYuMjg5MDYyIDU3MS44NDM3NSBMIDMzOS40NDUzMTIgNTQ4LjY1NjI1IEwgMzE3LjQ3MjY1NiA1MjYuNTQ2ODc1IEMgMzAyLjg3ODkwNiA1MTEuODY3MTg4IDI5Ni4xMDU0NjkgNTA0LjA1ODU5NCAyOTcuMjk2ODc1IDUwMy4zMDA3ODEgQyAyOTguMjg1MTU2IDUwMi42NzE4NzUgMzAzLjkyNTc4MSA1MDIuMTQ0NTMxIDMwOS44MzIwMzEgNTAyLjEzMjgxMiBMIDMyMC41NzQyMTkgNTAyLjEwOTM3NSBMIDMzNi40NjQ4NDQgNTE4LjkxNzk2OSBMIDM1Mi4zNjMyODEgNTM1LjcyNjU2MiBMIDM4Ni4wNzQyMTkgNTAyLjEwOTM3NSBMIDQxMS4yOTY4NzUgNTAyLjEwOTM3NSBMIDM4OS4yOTI5NjkgNTI0LjQyMTg3NSBDIDM3Ny4xOTE0MDYgNTM2LjY5MTQwNiAzNjcuMjg5MDYyIDU0Ny4zMDQ2ODggMzY3LjI4OTA2MiA1NDguMDA3ODEyIEMgMzY3LjI4OTA2MiA1NDguNzE0ODQ0IDM3Ny41NjY0MDYgNTU5LjU4MjAzMSAzOTAuMTI4OTA2IDU3Mi4xNjAxNTYgQyA0MTEuNzM0Mzc1IDU5My44MDQ2ODggNDEyLjcxODc1IDU5NS4wMzkwNjIgNDA4LjMzNTkzOCA1OTUuMDM5MDYyIEMgNDA1Ljc4OTA2MiA1OTUuMDM5MDYyIDM5OS43MjY1NjIgNTk1LjQzMzU5NCAzOTQuODYzMjgxIDU5NS45MjU3ODEgTCAzODYuMDI3MzQ0IDU5Ni44MDQ2ODggWiBNIDQ0Ny4yNzczNDQgNTk1LjEwOTM3NSBMIDQyNi4xMDE1NjIgNTk0LjI4OTA2MiBMIDQyNi4xNjAxNTYgNTUwLjUyNzM0NCBDIDQyNi4xOTE0MDYgNTI2LjQ1NzAzMSA0MjYuNzYxNzE5IDUwNS44ODY3MTkgNDI3LjQyMTg3NSA1MDQuODE2NDA2IEMgNDI4LjM2MzI4MSA1MDMuMjkyOTY5IDQzOC43ODEyNSA1MDIuNzU3ODEyIDQ3NC4zOTg0MzggNTAyLjQwMjM0NCBMIDUyMC4xNzE4NzUgNTAxLjk0OTIxOSBMIDUyMC4xNzE4NzUgNTE4LjY5OTIxOSBMIDQ4Ni4wNzQyMTkgNTE4LjE2NDA2MiBDIDQ2Ny4zMTY0MDYgNTE3Ljg2NzE4OCA0NTAuNzkyOTY5IDUxNy45MjU3ODEgNDQ5LjM1MTU2MiA1MTguMjg5MDYyIEMgNDQ3LjE0ODQzOCA1MTguODQzNzUgNDQ2LjczMDQ2OSA1MjAuNzIyNjU2IDQ0Ni43MzA0NjkgNTMwLjAxNTYyNSBMIDQ0Ni43MzA0NjkgNTQxLjA3ODEyNSBMIDUxMy43MjY1NjIgNTQxLjA3ODEyNSBMIDUxMy40NjQ4NDQgNTQ1LjU3NDIxOSBDIDUxMi43ODUxNTYgNTU3LjIxODc1IDUxNi40NzY1NjIgNTU2LjA2NjQwNiA0NzkuODkwNjI1IDU1Ni4wNjY0MDYgTCA0NDcuMTAxNTYyIDU1Ni4wNjY0MDYgTCA0NDYuMTY3OTY5IDU2MC43NTM5MDYgQyA0NDUuNjUyMzQ0IDU2My4zMjgxMjUgNDQ1LjIzMDQ2OSA1NjguNzIyNjU2IDQ0NS4yMzA0NjkgNTcyLjc0MjE4OCBMIDQ0NS4yMzA0NjkgNTgwLjA1MDc4MSBMIDUyMS44MjgxMjUgNTgwLjA1MDc4MSBMIDUyMC45MjE4NzUgNTk1Ljc4NTE1NiBMIDQ5NC42OTE0MDYgNTk1Ljg1NTQ2OSBDIDQ4MC4yNjU2MjUgNTk1Ljg5MDYyNSA0NTguOTI5Njg4IDU5NS41NTg1OTQgNDQ3LjI3NzM0NCA1OTUuMTA5Mzc1IFogTSA2MTMuODQ3NjU2IDU4MC4wNTA3ODEgTCA1OTcuNDE0MDYyIDU2My41NjI1IEwgNTYzLjYzNjcxOSA1NjMuNTYyNSBMIDU2My42MzY3MTkgNTk1LjAzOTA2MiBMIDU0Mi42NTIzNDQgNTk1LjAzOTA2MiBMIDU0Mi42NTIzNDQgNTAzLjgyNDIxOSBMIDU1MC44NDM3NSA1MDIuODAwNzgxIEMgNTU1LjM0NzY1NiA1MDIuMjM4MjgxIDU3My43MjY1NjIgNTAyLjA5Mzc1IDU5MS42ODc1IDUwMi40ODA0NjkgQyA2MjYuMTgzNTk0IDUwMy4yMjI2NTYgNjMzLjc5Mjk2OSA1MDQuNDkyMTg4IDY0Mi45ODgyODEgNTExLjAzOTA2MiBDIDY0NS41MzUxNTYgNTEyLjg1NTQ2OSA2NDguNzM0Mzc1IDUxNi40NzY1NjIgNjUwLjEwMTU2MiA1MTkuMDg5ODQ0IEMgNjUzLjM5ODQzOCA1MjUuMzk0NTMxIDY1My4zODY3MTkgNTQwLjMwNDY4OCA2NTAuMDgyMDMxIDU0Ni42MjEwOTQgQyA2NDYuNjI1IDU1My4yMzgyODEgNjM5LjIzMDQ2OSA1NTguNDk2MDk0IDYzMC4zMzU5MzggNTYwLjY3MTg3NSBDIDYyNi4yMTQ4NDQgNTYxLjY3OTY4OCA2MjIuNTY2NDA2IDU2Mi43MzgyODEgNjIyLjIzMDQ2OSA1NjMuMDE5NTMxIEMgNjIxLjg5NDUzMSA1NjMuMzA0Njg4IDYyOC45MjE4NzUgNTcwLjQ1MzEyNSA2MzcuODUxNTYyIDU3OC45MTQwNjIgTCA2NTQuMDgyMDMxIDU5NC4yODkwNjIgTCA2NDcuNDU3MDMxIDU5NS4zMDQ2ODggQyA2MzEuMjA3MDMxIDU5Ny43ODUxNTYgNjMxLjc5Njg3NSA1OTguMDUwNzgxIDYxMy44NDc2NTYgNTgwLjA1MDc4MSBaIE0gNjA5LjY5NTMxMiA1NDguNTc0MjE5IEMgNjIxLjY1MjM0NCA1NDguNTc0MjE5IDYyMi41NTg1OTQgNTQ4LjMzOTg0NCA2MjYuNzA3MDMxIDU0NC4xOTUzMTIgQyA2MzAuMjE4NzUgNTQwLjY3OTY4OCA2MzEuMDg1OTM4IDUzOC41MDc4MTIgNjMxLjA4NTkzOCA1MzMuMjEwOTM4IEMgNjMxLjA4NTkzOCA1MjguMTgzNTk0IDYzMC4yMzA0NjkgNTI1LjgwODU5NCA2MjcuNDg0Mzc1IDUyMy4yMzA0NjkgQyA2MjUuNTAzOTA2IDUyMS4zNjcxODggNjIxLjI4NTE1NiA1MTkuMjQ2MDk0IDYxOC4xMTcxODggNTE4LjUwNzgxMiBDIDYxMS4zNDM3NSA1MTYuOTM3NSA1ODYuMDA3ODEyIDUxNi42ODM1OTQgNTcyLjg1MTU2MiA1MTguMDYyNSBMIDU2My42MzY3MTkgNTE5LjAyMzQzOCBMIDU2My42MzY3MTkgNTQ4LjM5NDUzMSBMIDU2OS4yNTc4MTIgNTQ5LjA3NDIxOSBDIDU3Mi4zNTE1NjIgNTQ5LjQ0OTIxOSA1NzkuODcxMDk0IDU0OS40OTIxODggNTg1Ljk3MjY1NiA1NDkuMTY0MDYyIEMgNTkyLjA3NDIxOSA1NDguODM5ODQ0IDYwMi43NSA1NDguNTc0MjE5IDYwOS42OTUzMTIgNTQ4LjU3NDIxOSBaIE0gNzYzLjQyNTc4MSA1ODQuOTY4NzUgTCA3NTguMTA1NDY5IDU3NC4wNTQ2ODggTCA2OTguNTcwMzEyIDU3NC4wNTQ2ODggTCA2ODguMDAzOTA2IDU5NS4wMzkwNjIgTCA2NjUuNzg1MTU2IDU5NS4wMzkwNjIgTCA2NzcuNzUzOTA2IDU3Mi45Mjk2ODggQyA2ODQuMzM1OTM4IDU2MC43Njk1MzEgNjk1LjkyMTg3NSA1MzkuODY3MTg4IDcwMy40OTYwOTQgNTI2LjQ3MjY1NiBMIDcxNy4yNjk1MzEgNTAyLjEyNSBMIDcyOC44MTY0MDYgNTAyLjExNzE4OCBMIDc0MC4zNTU0NjkgNTAyLjEwOTM3NSBMIDc0NS44NjMyODEgNTExLjQ3NjU2MiBDIDc1NC4yNzM0MzggNTI1Ljc4NTE1NiA3ODEuNTAzOTA2IDU3NS4xMzI4MTIgNzg2Ljc0NjA5NCA1ODUuNTY2NDA2IEwgNzkxLjM5ODQzOCA1OTQuODMyMDMxIEwgNzgzLjU2MjUgNTk1LjcxNDg0NCBDIDc2OS43NjU2MjUgNTk3LjI2NTYyNSA3NjkuMzA0Njg4IDU5Ny4wMTk1MzEgNzYzLjQyNTc4MSA1ODQuOTY4NzUgWiBNIDc0Ny43MzA0NjkgNTU5LjI2MTcxOSBDIDc0OS4yNTc4MTIgNTU4LjI5Mjk2OSA3NDcuMzc4OTA2IDU1My42NDg0MzggNzM5LjU0Mjk2OSA1MzkuMDUwNzgxIEMgNzMzLjk0OTIxOSA1MjguNjI1IDcyOSA1MjAuMDk3NjU2IDcyOC41NDY4NzUgNTIwLjA5NzY1NiBDIDcyNy42NzU3ODEgNTIwLjA5NzY1NiA3MDguNjAxNTYyIDU1NS41NDY4NzUgNzA3Ljc5Mjk2OSA1NTguNjkxNDA2IEMgNzA3LjQyMTg3NSA1NjAuMTIxMDk0IDcxMS44ODI4MTIgNTYwLjU1NDY4OCA3MjYuNTI3MzQ0IDU2MC41NDI5NjkgQyA3MzcuMDk3NjU2IDU2MC41MjczNDQgNzQ2LjY0MDYyNSA1NTkuOTUzMTI1IDc0Ny43MzA0NjkgNTU5LjI2MTcxOSBaIE0gNzQ3LjczMDQ2OSA1NTkuMjYxNzE5ICIvPgo8L3N2Zz4K" alt="NEXERA"></div></header>
+<main class="band"><div class="wrap">
+<section class="card">
+<div class="tabs" id="tabs"><button data-b="A" aria-pressed="true">A Blok · 8 kat</button><button data-b="B" aria-pressed="false">B Blok · 5 kat</button>
+<div class="leg"><span><i style="background:var(--t1);border:1.5px solid var(--t1b)"></i>1+1</span><span><i style="background:var(--t2);border:1.5px solid var(--t2b)"></i>2+1</span><span><i style="background:var(--off);border:1.5px dashed var(--line)"></i>Satışta değil</span></div></div>
+<div class="scroll"><table class="bld" id="bld"></table></div>
+<p class="hint">Bir daireye dokunun; fiyatı ve ödeme seçenekleri aşağıda açılır. Kutularda daire numarası, tipi ve liste fiyatı (milyon TL) yazar.</p>
+</section>
+<section class="det" id="det" aria-live="polite">
+<div class="card ut" id="ut"></div>
+<div class="card">
+<label class="l">Ödeme şekli</label><div class="seg" id="plan"><button data-v="0" aria-pressed="false">Peşin</button><button data-v="36" aria-pressed="true">36 ay</button><button data-v="24" aria-pressed="false">24 ay</button><button data-v="12" aria-pressed="false">12 ay</button></div>
+<label class="l">Para birimi</label><div class="seg two" id="cur"><button data-v="TL" aria-pressed="true">TL</button><button data-v="USD" aria-pressed="false">USD</button></div>
+<div class="sum"><div><div class="k" id="k1"></div><div class="v" id="v1"></div></div><div><div class="k" id="k2"></div><div class="v" id="v2"></div></div><div><div class="k" id="k3"></div><div class="v big" id="v3"></div><div class="sub" id="s3"></div></div></div>
+<div class="strip" id="strip" aria-hidden="true"></div>
+<details id="dt"><summary>Ay ay ödeme tablosu</summary><div class="scroll"><table class="t" id="tbl"></table></div></details>
+<a class="cta" id="wa" href="#">Bu daire için WhatsApp'tan bilgi al</a>
+<p class="note" id="note"></p>
+</div>
+</section>
+</div></main>
+<footer class="band">NEXERA İnşaat · Yakacık Çarşı Mah. Rota Sk. B Blok No:1 B Kartal / İstanbul · +90 551 272 06 06 · nexeralive.com<br>Görseller ve şema temsilidir; mimari proje ile kesinleşir. NEXERA fiyat ve koşulları değiştirme hakkını saklı tutar.</footer>
+<script>
+{
+const G={"A": [["7. Kat", [[114, "HY"], [113, "YB", "7. Kat", "2+1", 79, 7481300], [115, "H", "7. Kat", "2+1", 64, 6060800], [112, "B"], 0, [127, "B", "7. Kat", "1+1", 47, 4450900], [126, "B"], [116, "H", "7. Kat", "1+1", 46, 4356200], [117, "H"], [118, "H", "7. Kat", "1+1", 49, 4640300], [125, "B", "7. Kat", "2+1", 63, 5966100], [119, "HY", "7. Kat", "2+1", 73, 6913100], [120, "Y", "7. Kat", "1+1", 47, 4450900], 0, [124, "B", "7. Kat", "2+1", 63, 5966100], [121, "Y"], [122, "YB", "7. Kat", "2+1", 79, 7481300], [123, "B"]]], ["6. Kat", [[98, "HY"], [97, "YB", "6. Kat", "2+1", 79, 7378600], [99, "H", "6. Kat", "2+1", 64, 5977600], [96, "B"], 0, [111, "B", "6. Kat", "1+1", 47, 4389800], [110, "B"], [100, "H", "6. Kat", "1+1", 46, 4296400], [101, "H"], [102, "H", "6. Kat", "1+1", 49, 4576600], [109, "B", "6. Kat", "2+1", 63, 5884200], [103, "HY", "6. Kat", "2+1", 73, 6818200], [104, "Y", "6. Kat", "1+1", 47, 4389800], 0, [108, "B", "6. Kat", "2+1", 63, 5884200], [105, "Y"], [106, "YB", "6. Kat", "2+1", 79, 7378600], [107, "B"]]], ["5. Kat", [[82, "HY"], [81, "YB", "5. Kat", "2+1", 79, 7268000], [83, "H", "5. Kat", "2+1", 64, 5888000], [80, "B"], 0, [95, "B", "5. Kat", "1+1", 47, 4324000], [94, "B"], [84, "H", "5. Kat", "1+1", 46, 4232000], [85, "H"], [86, "H", "5. Kat", "1+1", 49, 4508000], [93, "B", "5. Kat", "2+1", 63, 5796000], [87, "HY"], [88, "Y", "5. Kat", "1+1", 47, 4324000], 0, [92, "B", "5. Kat", "2+1", 63, 5796000], [89, "Y", "5. Kat", "2+1", 64, 5888000], [90, "YB", "5. Kat", "2+1", 79, 7268000], [91, "B"]]], ["4. Kat", [[66, "HY"], [65, "YB", "4. Kat", "2+1", 79, 7165300], [67, "H", "4. Kat", "2+1", 64, 5804800], [64, "B"], 0, [79, "B", "4. Kat", "1+1", 47, 4262900], [78, "B"], [68, "H", "4. Kat", "1+1", 46, 4172200], [69, "H"], [70, "H", "4. Kat", "1+1", 49, 4444300], [77, "B", "4. Kat", "2+1", 63, 5714100], [71, "HY"], [72, "Y", "4. Kat", "1+1", 47, 4262900], 0, [76, "B", "4. Kat", "2+1", 63, 5714100], [73, "Y"], [74, "YB", "4. Kat", "2+1", 79, 7165300], [75, "B"]]], ["3. Kat", [[50, "HY"], [49, "YB", "3. Kat", "2+1", 79, 7054700], [51, "H", "3. Kat", "2+1", 64, 5715200], [48, "B"], 0, [63, "B", "3. Kat", "1+1", 47, 4197100], [62, "B"], [52, "H", "3. Kat", "1+1", 46, 4107800], [53, "H"], [54, "H", "3. Kat", "1+1", 49, 4375700], [61, "B", "3. Kat", "2+1", 63, 5625900], [55, "HY"], [56, "Y", "3. Kat", "1+1", 47, 4197100], 0, [60, "B", "3. Kat", "2+1", 63, 5625900], [57, "Y", "3. Kat", "2+1", 64, 5715200], [58, "YB", "3. Kat", "2+1", 79, 7054700], [59, "B"]]], ["2. Kat", [[34, "HY"], [33, "YB", "2. Kat", "2+1", 79, 6952000], [35, "H", "2. Kat", "2+1", 64, 5632000], [32, "B"], 0, [47, "B", "2. Kat", "1+1", 47, 4136000], [46, "B"], [36, "H", "2. Kat", "1+1", 46, 4048000], [37, "H", "2. Kat", "1+1", 49, 4312000], [38, "H", "2. Kat", "1+1", 49, 4312000], [45, "B", "2. Kat", "2+1", 63, 5544000], [39, "HY", "2. Kat", "2+1", 73, 6424000], [40, "Y", "2. Kat", "1+1", 47, 4136000], 0, [44, "B", "2. Kat", "2+1", 63, 5544000], [41, "Y"], [42, "YB", "2. Kat", "2+1", 79, 6952000], [43, "B"]]], ["1. Kat", [[18, "HY"], [17, "YB", "1. Kat", "2+1", 79, 6841400], [19, "H", "1. Kat", "2+1", 64, 5542400], [16, "B"], 0, [31, "B", "1. Kat", "1+1", 47, 4070200], [30, "B", "1. Kat", "2+1", 63, 5455800], [20, "H", "1. Kat", "1+1", 46, 3983600], [21, "H"], [22, "H", "1. Kat", "1+1", 49, 4243400], [29, "B", "1. Kat", "2+1", 63, 5455800], [23, "HY"], [24, "Y", "1. Kat", "1+1", 47, 4070200], 0, [28, "B", "1. Kat", "2+1", 63, 5455800], [25, "Y", "1. Kat", "2+1", 64, 5542400], [26, "YB", "1. Kat", "2+1", 79, 6841400], [27, "B"]]], ["Zemin", [[3, "HY"], [2, "YB", "Zemin", "2+1", 84, 7165200], [4, "H", "Zemin", "2+1", 68, 5800400], [1, "B"], 0, [null, "B"], [15, "B"], [5, "H", "Zemin", "1+1", 49, 4179700], [6, "H"], [7, "H", "Zemin", "1+1", 52, 4435600], [14, "B", "Zemin", "2+1", 68, 5800400], [8, "HY", "Zemin", "2+1", 78, 6653400], [9, "Y", "Zemin", "1+1", 50, 4265000], 0, [13, "B", "Zemin", "1+1", 52, 4435600], [10, "Y"], [11, "YB", "Zemin", "2+1", 84, 7165200], [12, "B"]]]], "B": [["4. Kat", [[35, "YS", "4. Kat", "2+1", 73, 6767100], [34, "YB", "4. Kat", "2+1", 73, 6767100], [36, "S", "4. Kat", "1+1", 44, 4078800], [33, "B"], 0, [37, "S"], [38, "HS"], [39, "HB", "4. Kat", "2+1", 73, 6767100], [40, "B", "4. Kat", "2+1", 73, 6767100]]], ["3. Kat", [[27, "YS"], [26, "YB", "3. Kat", "2+1", 73, 6664900], [28, "S"], [25, "B"], 0, [29, "S"], [30, "HS"], [31, "HB", "3. Kat", "2+1", 73, 6664900], [32, "B", "3. Kat", "2+1", 73, 6664900]]], ["2. Kat", [[19, "YS"], [18, "YB", "2. Kat", "2+1", 73, 6570000], [20, "S"], [17, "B"], 0, [21, "S"], [22, "HS", "2. Kat", "2+1", 76, 6840000], [23, "HB", "2. Kat", "2+1", 73, 6570000], [24, "B", "2. Kat", "2+1", 73, 6570000]]], ["1. Kat", [[11, "YS", "1. Kat", "2+1", 73, 6475100], [10, "YB", "1. Kat", "2+1", 73, 6475100], [12, "S"], [9, "B"], 0, [13, "S"], [14, "HS", "1. Kat", "2+1", 76, 6741200], [15, "HB", "1. Kat", "2+1", 73, 6475100], [16, "B", "1. Kat", "2+1", 73, 6475100]]], ["Zemin", [[3, "YS", "Zemin", "2+1", 73, 6372900], [2, "YB", "Zemin", "1+1", 44, 3841200], [4, "S"], [1, "B"], 0, [5, "S"], [6, "HS"], [7, "HB", "Zemin", "2+1", 73, 6372900], [8, "B", "Zemin", "2+1", 73, 6372900]]]]};
+const CN={H:'Havaalanı tarafı',HY:'Köşe · havaalanı + yol',HB:'Köşe · havaalanı + bahçe',HS:'Köşe · havaalanı + yan',Y:'Yol cephesi',YB:'Köşe · yol + bahçe',B:'Bahçe cephesi',S:'Yan cephe',YS:'Köşe · yol + yan'};
+const USD=50.45,STEPS={36:[.5,.7,.9,1.1,1.3,1.5],24:[.7,.9,1.1,1.3],12:[.9,1.1]};
+const $=id=>document.getElementById(id);
+const fT=x=>Math.round(x).toLocaleString('tr-TR')+' TL',fU=x=>'$'+Math.round(x).toLocaleString('en-US');
+const r500=x=>Math.round(x/500)*500,r100=x=>Math.round(x/100)*100,r10=x=>Math.round(x/10)*10;
+const M=x=>(x/1e6).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const AY=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+let blk='A',sel=null,plan=36,cur='TL';
+function drawBld(){
+  const g=G[blk];let h='';
+  for(const [fl,row] of g){h+=`<tr><th>${fl}</th>`+row.map(c=>{if(!c)return '<td><div class="st"></div></td>';if(c[0]==null)return '<td></td>';
+    if(c.length<3)return `<td><div class="u off" title="Satışta değil"><b>${c[0]}</b><small>Satışta değil</small></div></td>`;
+    const on=sel&&sel.b===blk&&sel.n===c[0];
+    return `<td><button class="u ${c[3]==='1+1'?'t1':'t2'}${on?' sel':''}" data-n="${c[0]}" aria-label="Daire ${c[0]}, ${c[3]}, ${c[4]} metrekare"><b>${c[0]}</b><small>${c[3]} · ${c[4]} m²</small><em>${M(c[5])} M₺</em></button></td>`}).join('')+'</tr>'}
+  h+=`<tr><th></th><td colspan="${g[0][1].length}"><div class="base">−1. BODRUM · OTOPARK · SIĞINAK</div></td></tr>`;
+  $('bld').innerHTML=h;
+}
+function find(b,n){for(const [,row] of G[b])for(const c of row)if(c&&c[0]===n&&c.length>2)return c}
+function calc(L){
+  const list=cur==='TL'?L:r100(L/USD),kap=cur==='TL'?L*0.05:r100(list*0.05);
+  if(!plan){const p=cur==='TL'?L*0.8:r100(list*0.8);return{list,pay:p,down:p,rows:[],kap}}
+  let down,rows=[];
+  if(cur==='TL'){down=L*0.5;const k=L-down,st=STEPS[plan].map(s=>r500(k/plan*s));for(let i=0;i<plan;i++)rows.push(st[Math.floor(i/6)]);rows[plan-1]=k-rows.slice(0,-1).reduce((a,b)=>a+b,0)}
+  else{const m=r10(list*0.5/plan);down=list-plan*m;for(let i=0;i<plan;i++)rows.push(m)}
+  return{list,pay:list,down,rows,kap}
+}
+function render(){
+  $('det').style.display=sel?'':'none';if(!sel)return;
+  const c=find(sel.b,sel.n),L=c[5],f=cur==='TL'?fT:fU,x=calc(L);
+  $('ut').innerHTML=`<div class="k">${sel.b} Blok · ${c[2]}</div><h2>Daire ${c[0]}</h2><div class="tags"><span>${c[3]}</span><span>${c[4]} m² brüt</span><span>${CN[c[1]]||''}</span></div><div class="k">Liste fiyatı</div><div class="price">${fT(L)}</div><div class="row2"><div><div class="k">Peşin fiyat (%20 indirimli)</div><div class="v">${fT(L*0.8)}</div></div><div><div class="k">Dolar karşılığı</div><div class="v">${fU(r100(L/USD))}</div></div></div><p class="note">Kat yükseldikçe m² fiyatı artar. Her daireye 1 araçlık otopark.</p>`;
+  let h='<thead><tr><th>Tarih</th><th>Açıklama</th><th class="n">Tutar</th></tr></thead><tbody>';
+  if(!plan){$('k1').textContent='Liste fiyatı';$('v1').textContent=f(x.list);$('k2').textContent='İndirim (%20)';$('v2').textContent=f(x.list-x.pay);$('k3').textContent='Ödenecek tutar';$('v3').textContent=f(x.pay);$('s3').textContent='tamamı sözleşmede';
+    h+=`<tr class="dp"><td>Rezervasyon</td><td>Kapora (%5)</td><td class="n">${f(x.kap)}</td></tr><tr class="dp"><td>Sözleşme</td><td>Kalan peşin bedel</td><td class="n">${f(x.pay-x.kap)}</td></tr>`;$('strip').innerHTML='<i class="d" style="height:100%;flex:1"></i>'}
+  else{const mn=Math.min(...x.rows),mx=Math.max(...x.rows);
+    $('k1').textContent='Peşinat (%50)';$('v1').textContent=f(x.down);$('k2').textContent='Vade';$('v2').textContent=plan+' ay, faizsiz';$('k3').textContent=mn===mx?'Aylık taksit':'İlk aylık taksit';$('v3').textContent=f(mn);$('s3').textContent=mn===mx?'her ay eşit':`6 ayda bir artar · son ay ${f(x.rows[plan-1])}`;
+    h+=`<tr class="dp"><td>Rezervasyon</td><td>Kapora (%5, peşinattan düşülür)</td><td class="n">${f(x.kap)}</td></tr><tr class="dp"><td>Sözleşme</td><td>Kalan peşinat</td><td class="n">${f(x.down-x.kap)}</td></tr>`;
+    const d=new Date();x.rows.forEach((v,i)=>{const m=new Date(d.getFullYear(),d.getMonth()+i+1,1);h+=`<tr><td>${i+1}. ay · ${AY[m.getMonth()]} ${m.getFullYear()}</td><td>Taksit</td><td class="n">${f(v)}</td></tr>`});
+    $('strip').innerHTML='<i class="d" style="height:100%"></i>'+x.rows.map(v=>`<i style="height:${Math.max(4,v/mx*50)}%"></i>`).join('')}
+  h+=`<tr class="tot"><td></td><td>Toplam</td><td class="n">${f(x.pay)}</td></tr></tbody>`;$('tbl').innerHTML=h;
+  const msg=`Merhaba, NEXERA PORT ${sel.b} Blok Daire ${c[0]} (${c[3]}, ${c[4]} m²) için ${plan?plan+' ay vadeli':'peşin'} ${cur} ödeme planı hakkında bilgi almak istiyorum.`;
+  $('wa').href='https://wa.me/905512720606?text='+encodeURIComponent(msg);
+  $('note').textContent=(cur==='USD'?'Döviz tutarları 1 USD = 50,45 TL referans kurla bilgi amaçlıdır; ödeme günündeki kur esas alınır. ':'')+(plan&&cur==='TL'?'TL taksitleri 6 ayda bir artar. ':'')+'Tarihler örnektir; ödeme takvimi sözleşme tarihine göre başlar. Kapora daire fiyatının %5’idir ve peşinattan düşülür. Tapu harcı, noter ve abonelik giderleri alıcıya aittir.';
+}
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;blk=b.dataset.b;for(const x of $('tabs').querySelectorAll('button'))x.setAttribute('aria-pressed',x===b);drawBld()});
+$('bld').addEventListener('click',e=>{const b=e.target.closest('button.u');if(!b)return;sel={b:blk,n:+b.dataset.n};drawBld();render();$('det').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth',block:'start'})});
+function seg(id,cb){$(id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;for(const x of $(id).children)x.setAttribute('aria-pressed',x===b);cb(b.dataset.v);render()})}
+seg('plan',v=>plan=+v);seg('cur',v=>cur=v);
+drawBld();render();
+}
+</script>
+</body></html>
