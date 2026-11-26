@@ -5,22 +5,22 @@
 <script>
 /* Android: Play Store uygulamasını doğrudan aç (Meta uygulama-içi tarayıcıda da), gelen utm_* referrer'a taşınır; bekleme yok. */
 (function(){
-  var PKG="app.metrojam.game",CMP="metrojam_trafik",u=navigator.userAgent||"";
-  if(/facebookexternalhit|Facebot|bot|crawl|spider/i.test(u)||!/android/i.test(u))return;
-  var q,r={utm_source:"meta",utm_medium:"paid",utm_campaign:CMP},k,ref=[];
-  try{q=new URLSearchParams(location.search);["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(n){var v=q.get(n);if(v)r[n]=v.slice(0,80)})}catch(e){}
-  for(k in r)ref.push(k+"="+encodeURIComponent(r[k]));
-  ref=encodeURIComponent(ref.join("&"));
-  var web="https://play.google.com/store/apps/details?id="+PKG+"&referrer="+ref;
-  try{location.replace("intent://details?id="+PKG+"&referrer="+ref+"#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url="+encodeURIComponent(web)+";end")}catch(e){location.replace(web);return}
-  setTimeout(function(){if(document.visibilityState!=="hidden")location.replace(web)},700);
+var PKG="app.metrojam.game",CMP="metrojam_trafik",u=navigator.userAgent||"";
+if(/facebookexternalhit|Facebot|bot|crawl|spider/i.test(u)||!/android/i.test(u))return;
+var q,r={utm_source:"meta",utm_medium:"paid",utm_campaign:CMP},k,ref=[];
+try{q=new URLSearchParams(location.search);["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(n){var v=q.get(n);if(v)r[n]=v.slice(0,80)})}catch(e){}
+for(k in r)ref.push(k+"="+encodeURIComponent(r[k]));
+ref=encodeURIComponent(ref.join("&"));
+var web="https://play.google.com/store/apps/details?id="+PKG+"&referrer="+ref;
+try{location.replace("intent://details?id="+PKG+"&referrer="+ref+"#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url="+encodeURIComponent(web)+";end")}catch(e){location.replace(web);return}
+setTimeout(function(){if(document.visibilityState!=="hidden")location.replace(web)},700);
 })();
 </script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Metro Jam — Ücretsiz indir</title>
-<meta name="description" content="Yolcuları renklerine göre doğru vagona yerleştir, trenleri zamanında kaldır. Google Play'de ücretsiz.">
+<meta name="description" content="Yolcuları renklerine göre doğru vagona yerleştir, trenleri zamanında kaldır. App Store ve Google Play'de ücretsiz.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Metro Jam — Google Play'de ücretsiz">
+<meta property="og:title" content="Metro Jam — App Store ve Google Play'de ücretsiz">
 <meta property="og:description" content="Yolcuları doğru vagona yerleştir. İstanbul metrosu artık bir bulmaca.">
 <meta property="og:url" content="https://nexeralive.com/metro-jam/indir/">
 <meta property="og:image" content="https://nexeralive.com/metro-jam/icon.png">
@@ -31,16 +31,32 @@ html,body{margin:0;height:100%;background:#0b1424;color:#f3f5fa;font:16px/1.5 -a
 .w{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;text-align:center;box-sizing:border-box}
 img{width:84px;height:84px;border-radius:20px}
 p{color:#a8b3c9;margin:0}
+.l{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
 a.b{display:block;width:100%;max-width:320px;padding:15px 0;border-radius:14px;font-weight:800;text-decoration:none;background:linear-gradient(180deg,#ffb15c,#ff8a2a);color:#1a0e00}
+a.b.ios{background:#f3f5fa;color:#0b1424}
+.iosfirst .l{flex-direction:column-reverse}
 </style>
 <script src="/nx.js" defer></script></head>
 <body>
 <div class="w">
-  <img src="/metro-jam/icon.png" alt="Metro Jam">
-  <h1 style="margin:4px 0 0;font-size:24px">Metro Jam</h1>
-  <p>Google Play'e yönlendiriliyorsun…</p>
-  <a class="b" href="https://play.google.com/store/apps/details?id=app.metrojam.game">Google Play'den Ücretsiz İndir</a>
-  <p style="font-size:13px">Şu an yalnız Android'de. iPhone sürümü yakında.</p>
+<img src="/metro-jam/icon.png" alt="Metro Jam">
+<h1 style="margin:4px 0 0;font-size:24px">Metro Jam</h1>
+<p id="m">iPhone, iPad ve Android'de ücretsiz.</p>
+<div class="l">
+<a class="b" id="gp" href="https://play.google.com/store/apps/details?id=app.metrojam.game">Google Play'den Ücretsiz İndir</a>
+<a class="b ios" id="as" href="https://apps.apple.com/tr/app/metro-jam/id6825449919">App Store'dan Ücretsiz İndir</a>
 </div>
+</div>
+<script>
+/* iPhone/iPad: App Store düğmesi üstte; uygulama sayfası doğrudan açılır. */
+(function(){
+var u=navigator.userAgent||"",ios=/iPhone|iPad|iPod/i.test(u)||(/Macintosh/i.test(u)&&navigator.maxTouchPoints>1);
+if(/android/i.test(u)){document.getElementById("m").textContent="Google Play'e yönlendiriliyorsun…";return}
+if(!ios)return;
+document.querySelector(".w").className+=" iosfirst";
+document.getElementById("m").textContent="App Store'a yönlendiriliyorsun…";
+if(!/facebookexternalhit|Facebot|bot|crawl|spider/i.test(u)){try{location.replace("https://apps.apple.com/tr/app/metro-jam/id6825449919")}catch(e){}}
+})();
+</script>
 </body>
 </html>
