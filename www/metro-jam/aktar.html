@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><title>aktar</title><meta name="robots" content="noindex">
+<p id="d">hazırlanıyor…</p>
+<script>
+(async()=>{const q=new URLSearchParams(location.search);const f=q.get('f')||'tanitim.mp4';
+const b=await (await fetch(f)).arrayBuffer();document.getElementById('d').textContent='hazır '+b.byteLength;
+const send=()=>{if(window.opener){window.opener.postMessage({nxAktar:1,name:f,buf:b},'https://business.facebook.com');window.opener.postMessage({nxAktar:1,name:f,buf:b},'https://adsmanager.facebook.com')}};
+send();setInterval(send,1500);})();
+</script>
